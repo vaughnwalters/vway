@@ -10,12 +10,15 @@ app.config(function($routeProvider, FBCreds) {
     authDomain: FBCreds.authDomain
   };
   firebase.initializeApp(authConfig);
-  console.log('HELLO')
 
   $routeProvider
     .when('/', {
       templateUrl: "partials/loginRegister.html",
-      controller: "loginRegisterCtrl"
+      controller: "LoginRegisterCtrl"
+    })
+    .when('/citySearch', {
+      templateUrl: "partials/citySearch.html",
+      controller: "CitySearchCtrl"
     })
     .otherwise('/');
 });
