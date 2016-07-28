@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>vway // find vegan grub!</title>
+  <link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body ng-app="vway">
+  
+  <h1>yo</h1>
+<!-- need to include the quote in quotes for it to look for a string, otherwise interprets it as data with a property of html if i use a navbar here-->
+<!-- ​  <div ng-include="'partials/navbar.html'"></div> -->
+
+  <div ng-view><div>  
+
+<!-- third party libs -->
+  <script src="lib/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="lib/bower_components/angular/angular.min.js"></script>
+  <script src="lib/bower_components/angular-route/angular-route.min.js"></script>
+  <script src="lib/bower_components/firebase/firebase.js"></script>
+<!-- application scripts -->
+  <script src="app/app.js"></script>
+
+</body>
+</html>
