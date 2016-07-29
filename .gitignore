@@ -3,3 +3,4 @@ lib/bower_components
 lib/node_modules
 styles/
 app/values/FirebaseCreds.js
+nashvilleFactualResponse.json

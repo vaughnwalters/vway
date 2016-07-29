@@ -10,12 +10,14 @@
   <h1>{{restaurants[0].locality}}
   <div ng-repeat="restaurant in restaurants">
     <div>
+
+<!-- data to display to DOM -->
       <p><a ng-href="{{restaurant.website}}">{{restaurant.name}}</a></p>
-      <p>{{restaurant.address}}</p>
-      <p>{{restaurant.locality}}, {{restaurant.region}}</p>
-      <p>{{restaurant.tel}}</p>
-      <button>X</button>
+      <div ng-click="addToFavorites(restaurant)">
+        <p>{{restaurant.address}}</p>
+        <p>{{restaurant.locality}}, {{restaurant.region}}</p>
+        <p>{{restaurant.tel}}</p>
+        
+      </div>
     </div>
   </div>
-
-

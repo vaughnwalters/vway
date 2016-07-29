@@ -1,18 +1,64 @@
 "use strict";
 
-app.controller("CitySearchCtrl", function($scope, $routeParams, SearchDatabaseFactory) {
+app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory, AuthFactory) {
+
+
 
   $scope.restaurants = [];
 
 
-  $scope.searchDatabase = function (cityToSearch) {
-    SearchDatabaseFactory.getRestaurantList(cityToSearch)
+// *******************************
+// COMMENT IN FOR USING FACTUAL (also DatabaseFactory.js):
+  // $scope.searchDatabase = function (cityToSearch) {
+  //   DatabaseFactory.getRestaurantList(cityToSearch)
+    
+// COMMENT IN FOR NASHVILLE TEST DATA (also DatabaseFactory.js):
+  $scope.searchDatabase = function () {
+    DatabaseFactory.getRestaurantList()
+// ******************************
     .then(function(dataFromResolve) {
-      console.log("in the controller I see movie data...", dataFromResolve);
+
+// make a function that loops through dataFromResolve and parses it to just key value pairs i need then push to array 
+
+
       $scope.restaurants = dataFromResolve.response.data;
-      console.log("$scope.restaurants", $scope.restaurants);
     });
   }
+
+
+
+  $scope.newFavorite = {
+    "name": "",
+    "address": "",
+    "locality": "",
+    "region": "",
+    "tel": "",
+    "website": "",
+    "uid": "",
+    "favoriteId": ""
+  }
+
+
+
+
+  $scope.addToFavorites = function(restaurant) {
+    $scope.newFavorite.uid = AuthFactory.getUser();
+    console.log("restaurant api data", restaurant.name, restaurant.address, restaurant.locality, restaurant.region, restaurant.tel, restaurant.website);
+    $scope.newFavorite.name = restaurant.name;
+    $scope.newFavorite.address = restaurant.address;
+    $scope.newFavorite.locality = restaurant.locality;
+    $scope.newFavorite.region = restaurant.region;
+    $scope.newFavorite.tel = restaurant.tel;
+    $scope.newFavorite.website = restaurant.website;
+    DatabaseFactory.postNewFavorite($scope.newFavorite);
+
+
+
+    console.log($scope.newFavorite);
+  }
+
+
+
 
 
 });
