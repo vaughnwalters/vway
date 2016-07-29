@@ -2,7 +2,41 @@
 
 app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
 
+  $scope.loginData = {
+    email: "",
+    password: ""
+  };
+
+  $scope.registerData = {
+    email: "",
+    password: ""
+  };
+
+  // register function
+
+  $scope.registerEmail = function() {
+    firebase.auth().createUserWithEmailAndPassword($scope.registerData.email, $scope.registerData.password)
+    .then(function(user) {
+      console.log("LOGIN", user.uid);
+      $location.path("/citySearch");
+      $scope.$apply();
+    });
+  }
+
+  // login function
+
+  $scope.loginEmail = function() {
+    firebase.auth().signOut();
+    firebase.auth().signInWithEmailAndPassword($scope.loginData.email, $scope.loginData.password)
+    .then(function() {
+      $location.path("/citySearch");
+      $scope.$apply();
+    });
+  }
+
+
   $scope.loginGoogle = function() {
+    firebase.auth().signOut();
     AuthFactory.authWithProvider()
     .then(function(result) {
       console.log(result);
@@ -21,4 +55,5 @@ app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
       // ...
     });
   }
+
 });  

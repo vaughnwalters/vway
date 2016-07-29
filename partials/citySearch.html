@@ -2,4 +2,20 @@
 
 <div ng-include="'partials/nav.html'"></div>
 
+<input type="text" ng-model="cityToSearch" placeholder="City?">
+<button ng-click="searchDatabase(cityToSearch)">search</button>
+
+
+<!-- *****SEARCH RESULT CARDS *****-->
+  <h1>{{restaurants[0].locality}}
+  <div ng-repeat="restaurant in restaurants">
+    <div>
+      <p><a ng-href="{{restaurant.website}}">{{restaurant.name}}</a></p>
+      <p>{{restaurant.address}}</p>
+      <p>{{restaurant.locality}}, {{restaurant.region}}</p>
+      <p>{{restaurant.tel}}</p>
+      <button>X</button>
+    </div>
+  </div>
+
 

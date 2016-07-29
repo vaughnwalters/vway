@@ -9,9 +9,6 @@
 </head>
 <body ng-app="vway">
   
-<!-- need to include the quote in quotes for it to look for a string, otherwise interprets it as data with a property of html if i use a navbar here-->
-<!-- ​  <div ng-include="'partials/navbar.html'"></div> -->
-
   <div ng-view></div>  
 
 <!-- third party libs -->
@@ -24,6 +21,7 @@
   <script src="app/app.js"></script>
 <!-- factories -->
   <script src="app/factories/AuthFactory.js"></script>
+  <script src="app/factories/SearchDatabaseFactory.js"></script>
 <!-- controllers -->
   <script src="app/controllers/NavCtrl.js"></script>
   <script src="app/controllers/LoginRegisterCtrl.js"></script>
