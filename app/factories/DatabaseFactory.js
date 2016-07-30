@@ -29,11 +29,10 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL){
     return $q(function(resolve, reject){
       $http.post(`${FirebaseURL}/favorites.json`,
        JSON.stringify(newFavorite))
-      // why are all these ObjFromFirebase the same name?
       .success(function(ObjFromFirebase){
         let newFavoriteId = ObjFromFirebase.name;
         newFavorite.favoriteId = newFavoriteId;
-        $http.put(`${FirebaseURL}/favorites/${newFavoriteId}.json`, newFavorite);
+        $http.patch(`${FirebaseURL}/favorites/${newFavoriteId}.json`, newFavorite);
       });
     });
   };

@@ -2,30 +2,7 @@
 
 app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory, AuthFactory) {
 
-
-
   $scope.restaurants = [];
-
-
-// *******************************
-// COMMENT IN FOR USING FACTUAL (also DatabaseFactory.js):
-  // $scope.searchDatabase = function (cityToSearch) {
-  //   DatabaseFactory.getRestaurantList(cityToSearch)
-    
-// COMMENT IN FOR NASHVILLE TEST DATA (also DatabaseFactory.js):
-  $scope.searchDatabase = function () {
-    DatabaseFactory.getRestaurantList()
-// ******************************
-    .then(function(dataFromResolve) {
-
-// make a function that loops through dataFromResolve and parses it to just key value pairs i need then push to array 
-
-
-      $scope.restaurants = dataFromResolve.response.data;
-    });
-  }
-
-
 
   $scope.newFavorite = {
     "name": "",
@@ -38,8 +15,19 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     "favoriteId": ""
   }
 
-
-
+// *******************************
+// COMMENT IN FOR USING FACTUAL (also DatabaseFactory.js):
+  // $scope.searchDatabase = function (cityToSearch) {
+  //   DatabaseFactory.getRestaurantList(cityToSearch)
+    
+// COMMENT IN FOR NASHVILLE TEST DATA (also DatabaseFactory.js):
+  $scope.searchDatabase = function () {
+    DatabaseFactory.getRestaurantList()
+// ******************************
+    .then(function(dataFromResolve) {
+      $scope.restaurants = dataFromResolve.response.data;
+    });
+  }
 
   $scope.addToFavorites = function(restaurant) {
     $scope.newFavorite.uid = AuthFactory.getUser();
@@ -49,12 +37,9 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     $scope.newFavorite.region = restaurant.region;
     $scope.newFavorite.tel = restaurant.tel;
     $scope.newFavorite.website = restaurant.website;
-    DatabaseFactory.postNewFavorite($scope.newFavorite);
+    DatabaseFactory.postNewFavorite($scope.newFavorite)
+  };
 
-
-
-    console.log($scope.newFavorite);
-  }
 
 
 
