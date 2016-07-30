@@ -43,7 +43,6 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
 
   $scope.addToFavorites = function(restaurant) {
     $scope.newFavorite.uid = AuthFactory.getUser();
-    console.log("restaurant api data", restaurant.name, restaurant.address, restaurant.locality, restaurant.region, restaurant.tel, restaurant.website);
     $scope.newFavorite.name = restaurant.name;
     $scope.newFavorite.address = restaurant.address;
     $scope.newFavorite.locality = restaurant.locality;
