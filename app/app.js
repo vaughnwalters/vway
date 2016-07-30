@@ -20,5 +20,9 @@ app.config(function($routeProvider, FBCreds) {
       templateUrl: "partials/citySearch.html",
       controller: "CitySearchCtrl"
     })
+    .when('/favorites', {
+      templateUrl: "partials/favorites.html",
+      controller: "FavoritesCtrl"
+    })
     .otherwise('/');
 });

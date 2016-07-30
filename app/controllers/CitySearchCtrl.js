@@ -40,9 +40,4 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     DatabaseFactory.postNewFavorite($scope.newFavorite)
   };
 
-
-
-
-
-
 });

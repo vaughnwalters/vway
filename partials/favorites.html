@@ -1,1 +1,31 @@
-<h1>favorites</h1>
+<h1>favorites</h1> 
+
+<div ng-include="'partials/nav.html'"></div>
+
+
+<!-- MAKE THIS BUTTON JUST FILTER FAVORITES ON THIS PAGE -->
+<input type="text" ng-model="searchFavorites" placeholder="search Favorites">
+
+<div ng-repeat="favorite in favorites | filter: searchFavorites">
+  <p><a ng-href="{{favorite.website}}">{{favorite.name}}</a></p>
+  <div>
+    <p>{{favorite.address}}</p>
+    <p>{{favorite.locality}}, {{favorite.region}}</p>
+    <p>{{favorite.tel}}</p>
+  </div>
+</div>  
+<!-- 
+****** FROM CITYSEARCH PARTIAL ******
+  
+  <h1>{{restaurants[0].locality}}
+  <div ng-repeat="restaurant in restaurants">
+    <div>
+
+      <p><a ng-href="{{restaurant.website}}">{{restaurant.name}}</a></p>
+      <div ng-click="addToFavorites(restaurant)">
+        <p>{{restaurant.address}}</p>
+        <p>{{restaurant.locality}}, {{restaurant.region}}</p>
+        <p>{{restaurant.tel}}</p>
+      </div>
+    </div>
+  </div> -->

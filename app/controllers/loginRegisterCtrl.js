@@ -21,7 +21,7 @@ app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
       $location.path("/citySearch");
       $scope.$apply();
     });
-  }
+  };
 
   // login function
 
@@ -32,7 +32,7 @@ app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
       $location.path("/citySearch");
       $scope.$apply();
     });
-  }
+  };
 
 
   $scope.loginGoogle = function() {
@@ -54,6 +54,6 @@ app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
       var credential = error.credential;
       // ...
     });
-  }
+  };
 
 });  

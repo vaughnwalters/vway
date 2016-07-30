@@ -1,9 +1,7 @@
 "use strict";
 
 app.controller("NavCtrl", function ($scope, AuthFactory, $location) {
-
-
- 
+  
   $scope.logout = function() {
     let currentUserId = AuthFactory.getUser();
     console.log("currentUserId", currentUserId);
@@ -14,12 +12,8 @@ app.controller("NavCtrl", function ($scope, AuthFactory, $location) {
       $location.url("/");
       $scope.$apply();
       console.log("currentUserId", currentUserId);
-    })
+    });
   };
-
-
-
-
-
-})
+  
+});
 

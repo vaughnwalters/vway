@@ -1,6 +1,6 @@
 "use strict";
 
-app.factory("DatabaseFactory", function($q, $http, FirebaseURL){
+app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
 
 // *************************
@@ -38,7 +38,29 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL){
   };
 
 
+
+  let getFavorites = function() {
+    let favorites = [];
+    return $q(function(resolve, reject) {
+      console.log("user id?", AuthFactory.getUser());
+      $http.get(`${FirebaseURL}/favorites.json?orderBy="uid"&equalTo="${AuthFactory.getUser()}"`)
+      .success(function(favoritesObj) {
+        // console.log("favoritesObj", favoritesObj);
+        //create array from object and loop thru keys to push each board to the favorites array
+        Object.keys(favoritesObj).forEach(function(key){
+          favorites.push(favoritesObj[key]);
+        });
+        // console.log("favorites:", favorites);
+        resolve (favorites);
+      })
+      .error(function(error) {
+        reject(error);
+      });
+    });
+  };
+
+
 // FOR THE LOVE OF GOD VAUGHN, REMEMBER TO EXPORT THESE FUNCTIONS
 
-  return {getRestaurantList, postNewFavorite};
+  return {getRestaurantList, postNewFavorite, getFavorites};
 });
