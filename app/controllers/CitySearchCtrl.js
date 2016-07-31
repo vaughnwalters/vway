@@ -12,7 +12,8 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     "tel": "",
     "website": "",
     "uid": "",
-    "favoriteId": ""
+    "favoriteId": "",
+    "comment" : ""
   }
 
 // *******************************

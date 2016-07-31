@@ -2,30 +2,21 @@
 
 <div ng-include="'partials/nav.html'"></div>
 
-
-<!-- MAKE THIS BUTTON JUST FILTER FAVORITES ON THIS PAGE -->
+<!-- filter favorites based on input -->
 <input type="text" ng-model="searchFavorites" placeholder="search Favorites">
 
+<!-- populate partial with favorites based on user -->
 <div ng-repeat="favorite in favorites | filter: searchFavorites">
   <p><a ng-href="{{favorite.website}}">{{favorite.name}}</a></p>
   <div>
     <p>{{favorite.address}}</p>
     <p>{{favorite.locality}}, {{favorite.region}}</p>
     <p>{{favorite.tel}}</p>
+    <input type="text" placeholder="add comment" ng-model="newFavorite.comment"/>
+    <button ng-click="addNewComment()">Save Comment</button>
+    <button ng-click="deleteComment()">Delete Comment</button>
+    <button ng-click="removeFavorite(favorite.favoriteId)">remove favorite</button>
+
+
   </div>
 </div>  
-<!-- 
-****** FROM CITYSEARCH PARTIAL ******
-  
-  <h1>{{restaurants[0].locality}}
-  <div ng-repeat="restaurant in restaurants">
-    <div>
-
-      <p><a ng-href="{{restaurant.website}}">{{restaurant.name}}</a></p>
-      <div ng-click="addToFavorites(restaurant)">
-        <p>{{restaurant.address}}</p>
-        <p>{{restaurant.locality}}, {{restaurant.region}}</p>
-        <p>{{restaurant.tel}}</p>
-      </div>
-    </div>
-  </div> -->

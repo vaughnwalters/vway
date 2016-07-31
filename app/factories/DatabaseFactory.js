@@ -25,6 +25,9 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
     }); 
   };
 
+
+
+
   let postNewFavorite = (newFavorite) => {
     return $q(function(resolve, reject){
       $http.post(`${FirebaseURL}/favorites.json`,
@@ -39,18 +42,18 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
 
 
+
+
   let getFavorites = function() {
     let favorites = [];
     return $q(function(resolve, reject) {
       console.log("user id?", AuthFactory.getUser());
       $http.get(`${FirebaseURL}/favorites.json?orderBy="uid"&equalTo="${AuthFactory.getUser()}"`)
       .success(function(favoritesObj) {
-        // console.log("favoritesObj", favoritesObj);
-        //create array from object and loop thru keys to push each board to the favorites array
+      //create array from object and loop thru keys to push each favorite to the favorites array
         Object.keys(favoritesObj).forEach(function(key){
           favorites.push(favoritesObj[key]);
         });
-        // console.log("favorites:", favorites);
         resolve (favorites);
       })
       .error(function(error) {
@@ -60,7 +63,26 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
   };
 
 
+
+
+
+
+// DELETE FAVORITE FUNCTION
+
+  let deleteFavorite = function(removeId){
+    let boardUrl = FirebaseURL + "/favorites/" + removeId + ".json";
+    return $q(function(resolve, reject){
+      $http.delete(boardUrl)
+        .success(function(){
+          resolve();
+        });
+    });
+  };
+
+
+
+
 // FOR THE LOVE OF GOD VAUGHN, REMEMBER TO EXPORT THESE FUNCTIONS
 
-  return {getRestaurantList, postNewFavorite, getFavorites};
+  return {getRestaurantList, postNewFavorite, getFavorites, deleteFavorite};
 });
