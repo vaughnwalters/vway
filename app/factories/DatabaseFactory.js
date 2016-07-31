@@ -41,6 +41,13 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
   };
 
 
+  let postComment = function(newComment, favoriteId) {
+    console.log("newComment", newComment);
+    return $q(function(resolve, reject){
+
+      $http.patch(`${FirebaseURL}/favorites/${favoriteId}.json`, { "comment": "this is the comment that i want" });
+    });
+  };
 
 
 
@@ -84,5 +91,5 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
 // FOR THE LOVE OF GOD VAUGHN, REMEMBER TO EXPORT THESE FUNCTIONS
 
-  return {getRestaurantList, postNewFavorite, getFavorites, deleteFavorite};
+  return {getRestaurantList, postNewFavorite, getFavorites, deleteFavorite, postComment};
 });
