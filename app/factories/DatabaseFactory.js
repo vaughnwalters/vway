@@ -45,7 +45,7 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
     console.log("newComment", newComment);
     return $q(function(resolve, reject){
 
-      $http.patch(`${FirebaseURL}/favorites/${favoriteId}.json`, { "comment": "this is the comment that i want" });
+      $http.patch(`${FirebaseURL}/favorites/${favoriteId}.json`,{ "comment": newComment});
     });
   };
 

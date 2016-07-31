@@ -14,17 +14,12 @@ DatabaseFactory.getFavorites()
 
 
 // ADD COMMENT FUNCTION
-$scope.addComment = function(inputComment) {
+$scope.addComment = function(inputComment, favoriteId) {
   console.log("inputComment", inputComment);
-  DatabaseFactory.postComment(inputComment);
+  console.log("favoriteId", favoriteId);
+  DatabaseFactory.postComment(inputComment, favoriteId);
 }
 
-
-
-
-// DELETE COMMENT FUNCTION
-
-// EDIT COMMENT FUNCTION
 
 // REMOVE FAVORITE FUNCTION
   $scope.removeFavorite = function(removeId) {
@@ -37,8 +32,6 @@ $scope.addComment = function(inputComment) {
         });
       });     
   };
-
-
 
 
 });

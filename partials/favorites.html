@@ -13,8 +13,7 @@
     <p>{{favorite.locality}}, {{favorite.region}}</p>
     <p>{{favorite.tel}}</p>
     <input type="text" placeholder="add comment" ng-model="favorite.comment"/>
-    <button ng-click="addComment(favorite.comment)">Save Comment</button>
-    <button ng-click="deleteComment(favorite.favoriteId)">Delete Comment</button>
+    <button ng-click="addComment(favorite.comment, favorite.favoriteId)">Save Comment</button>
     <button ng-click="removeFavorite(favorite.favoriteId)">remove favorite</button>
 
 
