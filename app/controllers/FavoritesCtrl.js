@@ -9,8 +9,8 @@ app.controller("FavoritesCtrl", function($scope, $routeParams, DatabaseFactory, 
 DatabaseFactory.getFavorites()
   .then(function(favorites) {
     console.log("favorites", favorites);
-    $scope.favorites = favorites
-})
+    $scope.favorites = favorites;
+});
 
 
 // ADD COMMENT FUNCTION
@@ -18,7 +18,7 @@ $scope.addComment = function(inputComment, favoriteId) {
   console.log("inputComment", inputComment);
   console.log("favoriteId", favoriteId);
   DatabaseFactory.postComment(inputComment, favoriteId);
-}
+};
 
 
 // REMOVE FAVORITE FUNCTION

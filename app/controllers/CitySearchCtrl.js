@@ -14,7 +14,7 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     "uid": "",
     "favoriteId": "",
     "comment" : ""
-  }
+  };
 
 // *******************************
 // COMMENT IN FOR USING FACTUAL (also DatabaseFactory.js):
@@ -28,7 +28,7 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     .then(function(dataFromResolve) {
       $scope.restaurants = dataFromResolve.response.data;
     });
-  }
+  };
 
   $scope.addToFavorites = function(restaurant) {
     $scope.newFavorite.uid = AuthFactory.getUser();
@@ -38,7 +38,7 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     $scope.newFavorite.region = restaurant.region;
     $scope.newFavorite.tel = restaurant.tel;
     $scope.newFavorite.website = restaurant.website;
-    DatabaseFactory.postNewFavorite($scope.newFavorite)
+    DatabaseFactory.postNewFavorite($scope.newFavorite);
   };
 
 });

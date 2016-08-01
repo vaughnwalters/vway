@@ -1,20 +1,19 @@
+
 <div ng-controller="NavCtrl">
-
- <div class="nav">
-   <div class="citySearch">
-     <a href="#/citySearch">VWAY</a> 
-     <!-- <img ng-src="../img/logo.gif"> -->
-   </div>
-
-   <div class="favorites">
-     <a href="#/favorites">Favorites</a>
-   </div>
-
-  <div class="logout">
-    <div>
-      <a ng-click="logout()">Logout</a>
+  <nav class="container">
+    <div class="nav-wrapper green darken-2">
+      <a href="#/citySearch" class="brand-logo">VWAY</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li class="active"><a href="#/citySearch"><i class=" large material-icons">search</i></a></li>
+        <li class="active"><a href="#/favorites"><i class="large material-icons">thumb_up</i></a></li>
+        <li class="active"><a ng-click="logout()"><i class="large material-icons">lock_open </i></a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="#/citySearch">Search</a></li>
+        <li><a href="#/favorites">Favorites</a></li>
+        <li><a ng-click="logout()">Logout</a></li>
+      </ul>
     </div>
-  </div>
-   
- </div>
+  </nav> 
 </div>
