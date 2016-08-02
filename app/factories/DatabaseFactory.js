@@ -5,15 +5,15 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
 // *************************
 // COMMENT IN TO USE FACTUAL API (also CitySearchCtrl):
-  // let getRestaurantList = (searchText) => {
-  //     return $q(function(resolve, reject){
-  //       $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=OGnUmTnKEdWMoOCjiZjHbiXLShgS7WOzSX285RiR&q=${searchText}`
-  //         )
+  let getRestaurantList = (searchText) => {
+      return $q(function(resolve, reject){
+        $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=OGnUmTnKEdWMoOCjiZjHbiXLShgS7WOzSX285RiR&q=${searchText}`
+          )
 
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
-  let getRestaurantList = () => {
-      return $q(function(resolve, reject){
-        $http.get(`nashvilleFactualResponse.json`)
+  // let getRestaurantList = () => {
+  //     return $q(function(resolve, reject){
+  //       $http.get(`nashvilleFactualResponse.json`)
 // *************************
           .success(function(returnObject){ 
             console.log("restaurants from DB", returnObject);
