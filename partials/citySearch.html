@@ -6,12 +6,11 @@
 <button ng-click="searchDatabase(cityToSearch)">search</button>
 
 
-<!-- *****SEARCH RESULT CARDS *****-->
-  <h1>{{restaurants[0].locality}}
+<!-- *****SEARCH RESULT CARDS NO MATERIALIZE *****-->
+<!--   <h1>{{restaurants[0].locality}}</h1>
   <div ng-repeat="restaurant in restaurants">
     <div>
 
-<!-- data to display to DOM -->
       <p><a ng-href="{{restaurant.website}}">{{restaurant.name}}</a></p>
       <div ng-click="addToFavorites(restaurant)">
         <p>{{restaurant.address}}</p>
@@ -19,5 +18,28 @@
         <p>{{restaurant.tel}}</p>
       </div>
     </div>
-  </div>
+  </div> -->
 
+
+
+<!-- *****SEARCH RESULT CARDS *****-->
+  <h1>{{restaurants[0].locality}}</h1>
+  <div ng-repeat="restaurant in restaurants">
+
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="http://cdn-img.health.com/sites/default/files/migration/images/slides/avocado-heart-400x400.jpg">
+      </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">{{restaurant.name}}<i class="material-icons right">more_vert</i></span>
+        <p><a ng-click="addToFavorites(restaurant)">Add to Favorites</a></p>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">{{restaurant.name}}<i class="material-icons right">close</i></span>
+        <p>{{restaurant.address}}</p>
+        <p>{{restaurant.locality}}, {{restaurant.region}}</p>
+        <p>{{restaurant.tel}}</p>
+      </div>
+    </div>
+
+  </div>  
