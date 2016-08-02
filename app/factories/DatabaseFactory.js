@@ -5,25 +5,66 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
 // *************************
 // COMMENT IN TO USE FACTUAL API (also CitySearchCtrl):
-  let getRestaurantList = (searchText) => {
-      return $q(function(resolve, reject){
-        $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=OGnUmTnKEdWMoOCjiZjHbiXLShgS7WOzSX285RiR&q=${searchText}`
-          )
+
+
+
+  // let getRestaurantList = (searchText) => {
+  //   let restaurantArray = []
+
+  //     return $q(function(resolve, reject){
+  //       $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=OGnUmTnKEdWMoOCjiZjHbiXLShgS7WOzSX285RiR&q=${searchText}`
+  //         )
 
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
-  // let getRestaurantList = () => {
-  //     return $q(function(resolve, reject){
-  //       $http.get(`nashvilleFactualResponse.json`)
+  let getRestaurantList = () => {
+      return $q(function(resolve, reject){
+        $http.get(`nashvilleFactualResponse.json`)
 // *************************
           .success(function(returnObject){ 
+
+            // for each loop to call getphotoreference
+            // push each item into array - will be an object with keyvalue pair 
+            // of 
+
+
             console.log("restaurants from DB", returnObject);
             resolve(returnObject);
+            // resolve the restaurantarray instead of returnobject
           })
           .error(function(error){
         reject(error);
       });  
     }); 
   };
+
+
+
+
+
+// *************************
+  // let getPhotoReference = (latitude, longitude) => {
+  //     return $q(function(resolve, reject){
+  //       $http.get(`google call pass in lat and long`
+  //         )
+
+
+  //         .success(function(returnObject){ 
+  //           console.log("restaurants from DB", returnObject);
+  //           resolve(returnObject);
+  //         })
+  //         .error(function(error){
+  //       reject(error);
+  //     });  
+  //   }); 
+  // };
+
+
+
+
+
+// let getPhoto = function() {
+
+// }
 
 
 
