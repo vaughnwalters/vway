@@ -23,23 +23,33 @@
 
 
 <!-- *****SEARCH RESULT CARDS *****-->
-  <h1>{{restaurants[0].locality}}</h1>
-  <div ng-repeat="restaurant in restaurants">
 
-    <div class="card">
-      <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="http://cdn-img.health.com/sites/default/files/migration/images/slides/avocado-heart-400x400.jpg">
-      </div>
-      <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">{{restaurant.name}}<i class="material-icons right">more_vert</i></span>
-        <p><a ng-click="addToFavorites(restaurant)">Add to Favorites</a></p>
-      </div>
-      <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">{{restaurant.name}}<i class="material-icons right">close</i></span>
-        <p>{{restaurant.address}}</p>
-        <p>{{restaurant.locality}}, {{restaurant.region}}</p>
-        <p>{{restaurant.tel}}</p>
+
+
+
+
+
+<h1>{{restaurants[0].locality}}</h1>
+
+<div ng-repeat="restaurant in restaurants">
+  <div class="row">
+    <div class="s12 m4 l3">    
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="http://cdn-img.health.com/sites/default/files/migration/images/slides/avocado-heart-400x400.jpg">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">{{restaurant.name}}<i class="material-icons right">more_vert</i></span>
+          <p><a href="" ng-click="addToFavorites(restaurant)">Add to Favorites</a></p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title green-text text-darken-4">{{restaurant.name}}<i class="material-icons right">close</i></span>
+          <p>{{restaurant.address}}</p>
+          <p>{{restaurant.locality}}, {{restaurant.region}}</p>
+          <p>{{restaurant.tel}}</p>
+          <p><a target="_blank" ng-href="{{restaurant.website}}">{{restaurant.website}}</a></p>
+        </div>
       </div>
     </div>
-
   </div>  
+</div>  
