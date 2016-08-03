@@ -30,8 +30,7 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
 // ******************************
     .then(function(dataFromResolve) {
       $scope.restaurants = dataFromResolve;
-      console.log("dataFromResolve", dataFromResolve);
-      // console.log("restaurants", $scope.restaurants);
+      console.log("restaurants", $scope.restaurants);
     });  
   };
 

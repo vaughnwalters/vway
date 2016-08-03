@@ -17,40 +17,32 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
   //         )
 
 
-
-// Why isn't returnObjArray[i] working after the "then statement"
-
-
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
   let getRestaurantList = () => {
       let returnObjArray = null;
+      let restaurantArray = [];
+      let count = 0;
       return $q(function(resolve, reject){
         $http.get(`nashvilleFactualResponse.json`)
 // *************************
           .success(function(returnObject){ 
             // push each item into array - will be an object with keyvalue pair 
             returnObjArray = returnObject.response.data;
-            let restaurantArray = [];
             for (var i = 0; i < returnObjArray.length; i++) {
-  // add IIFE closure to keep i scoped to entire for loop, including then statement            
-              (function(i){
-                getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
-                .then(function(returnFromPlacesCall) {
-  // if photoReference exists then do this, else use dat avocado picture
-                  // if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
-                  var photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
-                  returnObjArray[i].photoReference = photoReference;
-                  restaurantArray.push(returnObjArray[i]);
-                  // } else {
-                  //   console.log("AVOCADO PICTURE INSTEAD");
-
-                  // }
-                })
-                  console.log("restaurantArray", restaurantArray);
-              })(i);
+              getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
+              .then(function(returnFromPlacesCall) {
+// if photoReference exists then do this, else use dat avocado picture
+                // if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
+                var photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
+                returnObjArray[count].photoReference = photoReference;
+                restaurantArray.push(returnObjArray[count]);
+                // } else {
+                //   console.log("AVOCADO PICTURE INSTEAD");
+                // }
+                count++;  
+                resolve(restaurantArray);
+              })
             };
-            resolve(restaurantArray);
-            // resolve the restaurantArray instead of returnobject
           })
           .error(function(error){
         reject(error);
@@ -64,11 +56,8 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
 
 
-
 // *************************
   let getPhotoReference = (latitude, longitude, name) => {
-    // console.log(latitude, longitude, name);
-
       return $q(function(resolve, reject){
         
 
@@ -77,6 +66,8 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
         // COMMENT IN FOR nashvilleGooglePlacesResponse.json
         $http.get(`nashvilleGooglePlacesResponse.json`)
+
+
 
 
           .success(function(returnObject){ 
