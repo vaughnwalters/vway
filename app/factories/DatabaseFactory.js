@@ -15,21 +15,41 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
   //       $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=OGnUmTnKEdWMoOCjiZjHbiXLShgS7WOzSX285RiR&q=${searchText}`
   //         )
 
+
+
+// Why isn't returnObjArray[i] working after the "then statement"
+
+
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
   let getRestaurantList = () => {
+      let restaurantArray = [];
+      let returnObjArray = null;
       return $q(function(resolve, reject){
         $http.get(`nashvilleFactualResponse.json`)
 // *************************
           .success(function(returnObject){ 
-
-            // for each loop to call getphotoreference
             // push each item into array - will be an object with keyvalue pair 
-            // of 
-
-
-            console.log("restaurants from DB", returnObject);
+            returnObjArray = returnObject.response.data;
+            for (var i = 0; i < returnObjArray.length; i++) {
+              console.log("returnObjArray UNO", returnObjArray[i]);
+              getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
+              .then(function(returnFromPlacesCall) {
+                console.log(returnFromPlacesCall);
+// if photoReference exists then do this, else use dat avocado picture
+                // if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
+                var photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
+                console.log("photoReference", photoReference);
+                console.log("returnObjArray DOS", returnObjArray[i]);
+                // returnObjArray[i].photoReference = photoReference;
+                restaurantArray.push(returnObjArray);
+                console.log("restaurantArray", restaurantArray[i]);
+                // } else {
+                //   console.log("AVOCADO PICTURE INSTEAD");
+                // }
+              })
+            };
             resolve(returnObject);
-            // resolve the restaurantarray instead of returnobject
+            // resolve the restaurantArray instead of returnobject
           })
           .error(function(error){
         reject(error);
@@ -41,22 +61,31 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
 
 
+
+
+
 // *************************
-  // let getPhotoReference = (latitude, longitude) => {
-  //     return $q(function(resolve, reject){
-  //       $http.get(`google call pass in lat and long`
-  //         )
+  let getPhotoReference = (latitude, longitude, name) => {
+    // console.log(latitude, longitude, name);
+
+      return $q(function(resolve, reject){
+        
+
+        // COMMENT IN FOR GOOGLE PLACES API DATA
+        // $http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=AIzaSyAyWCfgRqpl3Uh8wX4D4nA-zmfQVZYCHek`)
+
+        // COMMENT IN FOR nashvilleGooglePlacesResponse.json
+        $http.get(`nashvilleGooglePlacesResponse.json`)
 
 
-  //         .success(function(returnObject){ 
-  //           console.log("restaurants from DB", returnObject);
-  //           resolve(returnObject);
-  //         })
-  //         .error(function(error){
-  //       reject(error);
-  //     });  
-  //   }); 
-  // };
+          .success(function(returnObject){ 
+            resolve(returnObject);
+          })
+          .error(function(error){
+        reject(error);
+      });  
+    }); 
+  };
 
 
 

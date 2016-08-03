@@ -13,7 +13,10 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     "website": "",
     "uid": "",
     "favoriteId": "",
-    "comment" : ""
+    "comment" : "",
+    "latitude": "",
+    "longitude": "", 
+    "photo": "http://cdn-img.health.com/sites/default/files/migration/images/slides/avocado-heart-400x400.jpg"
   };
 
 // *******************************
@@ -38,6 +41,9 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     $scope.newFavorite.region = restaurant.region;
     $scope.newFavorite.tel = restaurant.tel;
     $scope.newFavorite.website = restaurant.website;
+    $scope.newFavorite.photo = restaurant.photo;
+    $scope.newFavorite.photo = restaurant.photo;
+
     DatabaseFactory.postNewFavorite($scope.newFavorite);
   };
 
