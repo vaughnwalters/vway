@@ -33,8 +33,14 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
               .then(function(returnFromPlacesCall) {
 // if photoReference exists then do this, else use dat avocado picture
                 // if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
-                var photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
-                returnObjArray[count].photoReference = photoReference;
+                let photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
+                console.log(photoReference);
+                let photoPath = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyAyWCfgRqpl3Uh8wX4D4nA-zmfQVZYCHek"
+
+
+
+
+                returnObjArray[count].photoPath = photoPath;
                 restaurantArray.push(returnObjArray[count]);
                 // } else {
                 //   console.log("AVOCADO PICTURE INSTEAD");
@@ -51,12 +57,38 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
   };
 
 
+// HELPER FUNCTION FOR getRestaurantList
+  // let getPhotoURL = (photoReference) => {
+  //   console.log("photoReference", photoReference);
+  //    return $q(function(resolve, reject){
+        
+
+  //       // COMMENT IN FOR GOOGLE PHOTO API DATA
+  //       // $http.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyAyWCfgRqpl3Uh8wX4D4nA-zmfQVZYCHek`)
+
+  //       // COMMENT IN FOR nashvilleGooglePlacesResponse.json
+  //       $http.get(`nashvilleGooglePlacesResponse.json`)
+
+
+
+
+  //         .success(function(returnObject){ 
+  //           resolve(returnObject);
+  //         })
+  //         .error(function(error){
+  //       reject(error);
+  //     });  
+  //   }); 
+  // };
+
+
 
 
 
 
 
 // *************************
+// HELPER FUNCTION FOR getRestaurantList
   let getPhotoReference = (latitude, longitude, name) => {
       return $q(function(resolve, reject){
         
