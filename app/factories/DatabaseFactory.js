@@ -31,22 +31,21 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
             // push each item into array - will be an object with keyvalue pair 
             returnObjArray = returnObject.response.data;
             for (var i = 0; i < returnObjArray.length; i++) {
-              console.log("returnObjArray UNO", returnObjArray[i]);
-              getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
-              .then(function(returnFromPlacesCall) {
-                console.log(returnFromPlacesCall);
-// if photoReference exists then do this, else use dat avocado picture
-                // if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
-                var photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
-                console.log("photoReference", photoReference);
-                console.log("returnObjArray DOS", returnObjArray[i]);
-                // returnObjArray[i].photoReference = photoReference;
-                restaurantArray.push(returnObjArray);
-                console.log("restaurantArray", restaurantArray[i]);
-                // } else {
-                //   console.log("AVOCADO PICTURE INSTEAD");
-                // }
-              })
+  // add IIFE closure to keep i scoped to entire for loop, including then statement            
+              (function(i){
+                getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
+                .then(function(returnFromPlacesCall) {
+  // if photoReference exists then do this, else use dat avocado picture
+                  // if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
+                  var photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
+                  returnObjArray[i].photoReference = photoReference;
+                  restaurantArray.push(returnObjArray[i]);
+                  // } else {
+                  //   console.log("AVOCADO PICTURE INSTEAD");
+                  // }
+                  console.log("restaurantArray", restaurantArray);
+                })
+              })(i);
             };
             resolve(returnObject);
             // resolve the restaurantArray instead of returnobject
