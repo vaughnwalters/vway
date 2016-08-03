@@ -10,6 +10,7 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
   // let getRestaurantList = (searchText) => {
   //   let restaurantArray = []
+  //   let returnObjArray = null;
 
   //     return $q(function(resolve, reject){
   //       $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=OGnUmTnKEdWMoOCjiZjHbiXLShgS7WOzSX285RiR&q=${searchText}`
@@ -22,7 +23,6 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
   let getRestaurantList = () => {
-      let restaurantArray = [];
       let returnObjArray = null;
       return $q(function(resolve, reject){
         $http.get(`nashvilleFactualResponse.json`)
@@ -30,6 +30,7 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
           .success(function(returnObject){ 
             // push each item into array - will be an object with keyvalue pair 
             returnObjArray = returnObject.response.data;
+            let restaurantArray = [];
             for (var i = 0; i < returnObjArray.length; i++) {
   // add IIFE closure to keep i scoped to entire for loop, including then statement            
               (function(i){
@@ -42,12 +43,13 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
                   restaurantArray.push(returnObjArray[i]);
                   // } else {
                   //   console.log("AVOCADO PICTURE INSTEAD");
+
                   // }
-                  console.log("restaurantArray", restaurantArray);
                 })
+                  console.log("restaurantArray", restaurantArray);
               })(i);
             };
-            resolve(returnObject);
+            resolve(restaurantArray);
             // resolve the restaurantArray instead of returnobject
           })
           .error(function(error){

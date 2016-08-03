@@ -29,8 +29,10 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     DatabaseFactory.getRestaurantList()
 // ******************************
     .then(function(dataFromResolve) {
-      $scope.restaurants = dataFromResolve.response.data;
-    });
+      $scope.restaurants = dataFromResolve;
+      console.log("dataFromResolve", dataFromResolve);
+      // console.log("restaurants", $scope.restaurants);
+    });  
   };
 
   $scope.addToFavorites = function(restaurant) {
