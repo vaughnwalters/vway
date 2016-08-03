@@ -1,6 +1,6 @@
 "use strict";
 
-app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
+app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, GoogleCreds, FactualCreds){
 
 
 // *************************
@@ -8,22 +8,23 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
 
 
 
-  // let getRestaurantList = (searchText) => {
-  //   let restaurantArray = []
-  //   let returnObjArray = null;
-
-  //     return $q(function(resolve, reject){
-  //       $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=OGnUmTnKEdWMoOCjiZjHbiXLShgS7WOzSX285RiR&q=${searchText}`
-  //         )
+  let getRestaurantList = (searchText) => {
+    console.log("FactualApi", FactualCreds.apiKey);
+    let restaurantArray = []
+    let returnObjArray = null;
+    let count = 0;
+      return $q(function(resolve, reject){
+        $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
+          )
 
 
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
-  let getRestaurantList = () => {
-      let returnObjArray = null;
-      let restaurantArray = [];
-      let count = 0;
-      return $q(function(resolve, reject){
-        $http.get(`nashvilleFactualResponse.json`)
+  // let getRestaurantList = () => { 
+  //     let returnObjArray = null;
+  //     let restaurantArray = [];
+  //     let count = 0;
+  //     return $q(function(resolve, reject){
+  //       $http.get(`nashvilleFactualResponse.json`)
 // *************************
           .success(function(returnObject){ 
             // push each item into array - will be an object with keyvalue pair 
@@ -33,9 +34,10 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
               .then(function(returnFromPlacesCall) {
 // if photoReference exists then do this, else use dat avocado picture
                 // if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
+                console.log("<<<", returnFromPlacesCall);
                 let photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
                 console.log(photoReference);
-                let photoPath = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=AIzaSyAyWCfgRqpl3Uh8wX4D4nA-zmfQVZYCHek"
+                let photoPath = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GoogleCreds.apiKey}`
 
 
 
@@ -94,10 +96,10 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
         
 
         // COMMENT IN FOR GOOGLE PLACES API DATA
-        // $http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=AIzaSyAyWCfgRqpl3Uh8wX4D4nA-zmfQVZYCHek`)
+        $http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
 
         // COMMENT IN FOR nashvilleGooglePlacesResponse.json
-        $http.get(`nashvilleGooglePlacesResponse.json`)
+        // $http.get(`nashvilleGooglePlacesResponse.json`)
 
 
 
