@@ -1,7 +1,11 @@
 "use strict";
 
 var app = angular.module("vway", ["ngRoute"])
-.constant("FirebaseURL", "https://vway-7b92e.firebaseio.com");
+.constant("FirebaseURL", "https://vway-aff34.firebaseio.com");
+// .constant("FirebaseURL", "https://vway-7b92e.firebaseio.com");
+
+
+
 
 
 app.config(function($routeProvider, FBCreds) {
