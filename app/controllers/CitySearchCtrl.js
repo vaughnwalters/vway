@@ -21,12 +21,12 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
 
 // *******************************
 // COMMENT IN FOR USING FACTUAL (also DatabaseFactory.js):
-  // $scope.searchDatabase = function (cityToSearch) {
-  //   DatabaseFactory.getRestaurantList(cityToSearch)
+  $scope.searchDatabase = function (cityToSearch) {
+    DatabaseFactory.getRestaurantList(cityToSearch)
     
 // COMMENT IN FOR NASHVILLE TEST DATA (also DatabaseFactory.js):
-  $scope.searchDatabase = function () {
-    DatabaseFactory.getRestaurantList()
+  // $scope.searchDatabase = function () {
+  //   DatabaseFactory.getRestaurantList()
 // ******************************
     .then(function(dataFromResolve) {
       $scope.restaurants = dataFromResolve;
@@ -45,7 +45,14 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     $scope.newFavorite.latitude = restaurant.latitude;
     $scope.newFavorite.longitude = restaurant.longitude;
     $scope.newFavorite.photoPath = restaurant.photoPath;
+    
+    // refactor to look like this
+    // $scope.newFavorite = {
+    //   name: restaurant.name,
+    //   address: restaurant.address,
+    // }
 
+    console.log("THE NEW FAVOURITE IS: ", $scope.newFavorite)
     DatabaseFactory.postNewFavorite($scope.newFavorite);
   };
 

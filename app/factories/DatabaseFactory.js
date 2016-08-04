@@ -5,54 +5,53 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
 
 // *************************
 // COMMENT IN TO USE FACTUAL API (also CitySearchCtrl):
-  // let getRestaurantList = (searchText) => {
-  //   console.log("FactualApi", FactualCreds.apiKey);
-  //   let restaurantArray = []
-  //   let returnObjArray = null;
-  //   let count = 0;
-  //     return $q(function(resolve, reject){
-  //       $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
-  //         )
+  let getRestaurantList = (searchText) => {
+    console.log("FactualApi", FactualCreds.apiKey);
+    let restaurantArray = []
+    let returnObjArray = null;
+    let count = 0;
+      return $q(function(resolve, reject){
+        $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
+        )
 
 
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
-    let getRestaurantList = () => { 
-        let returnObjArray = null;
-        let restaurantArray = [];
-        let count = 0;
-        return $q(function(resolve, reject){
-          $http.get(`nashvilleFactualResponse.json`)
+    // let getRestaurantList = () => { 
+    //     let returnObjArray = null;
+    //     let restaurantArray = [];
+    //     let count = 0;
+    //     return $q(function(resolve, reject){
+    //       $http.get(`nashvilleFactualResponse.json`)
 // *************************
-          .success(function(returnObject){ 
-            // push each item into array - will be an object with keyvalue pair 
-            returnObjArray = returnObject.response.data;
-            for (var i = 0; i < returnObjArray.length; i++) {
-              console.log("i", i);
-              getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
-              .then(function(returnFromPlacesCall) {
+        .success(function(returnObject){ 
+          // push each item into array - will be an object with keyvalue pair 
+          returnObjArray = returnObject.response.data;
+          for (var i = 0; i < returnObjArray.length; i++) {
+            // console.log("i", i);
+            getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
+            .then(function(returnFromPlacesCall) {
 // if photoReference exists then do this, else use dat avocado picture
-                if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
-                console.log("<<<", returnFromPlacesCall);
+              // console.log("PHOTO RETURN: ", returnFromPlacesCall);
+              if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
+                // console.log("<<<", returnFromPlacesCall.results[0].photos[0].photo_reference);
+
                 let photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
-                console.log("photoReference", photoReference);
+                // console.log("photoReference: ", photoReference);
                 let photoPath = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GoogleCreds.apiKey}`
-
-
-
 
                 returnObjArray[count].photoPath = photoPath;
                 restaurantArray.push(returnObjArray[count]);
-                } else {
-                  console.log("AVOCADO PICTURE INSTEAD");
-                }
-                count++;
-                console.log("count", count);  
-                resolve(restaurantArray);
-              })
-            };
-          })
-          .error(function(error){
-        reject(error);
+              } else {
+                console.log("AVOCADO PICTURE INSTEAD");
+              }
+              count++;
+              // console.log("count", count);  
+              resolve(restaurantArray);
+            })
+          };
+        })
+        .error(function(error){
+          reject(error);
       });  
     }); 
   };
@@ -66,10 +65,10 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
         
 
         // COMMENT IN FOR GOOGLE PLACES API DATA
-        // $http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
+        $http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
 
         // COMMENT IN FOR nashvilleGooglePlacesResponse.json
-        $http.get(`nashvilleGooglePlacesResponse.json`)
+        // $http.get(`nashvilleGooglePlacesResponse.json`)
 
 
 
@@ -99,6 +98,7 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
       $http.post(`${FirebaseURL}/favorites.json`,
        JSON.stringify(newFavorite))
       .success(function(ObjFromFirebase){
+        console.log("FROM FIREBASE: ", ObjFromFirebase );
         let newFavoriteId = ObjFromFirebase.name;
         newFavorite.favoriteId = newFavoriteId;
         $http.patch(`${FirebaseURL}/favorites/${newFavoriteId}.json`, newFavorite);
