@@ -34,23 +34,33 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     });  
   };
 
-  $scope.addToFavorites = function(restaurant) {
-    $scope.newFavorite.uid = AuthFactory.getUser();
-    $scope.newFavorite.name = restaurant.name;
-    $scope.newFavorite.address = restaurant.address;
-    $scope.newFavorite.locality = restaurant.locality;
-    $scope.newFavorite.region = restaurant.region;
-    $scope.newFavorite.tel = restaurant.tel;
-    $scope.newFavorite.website = restaurant.website;
-    $scope.newFavorite.latitude = restaurant.latitude;
-    $scope.newFavorite.longitude = restaurant.longitude;
-    $scope.newFavorite.photoPath = restaurant.photoPath;
+  // $scope.addToFavorites = function(restaurant) {
+  //   $scope.newFavorite.uid = AuthFactory.getUser();
+  //   $scope.newFavorite.name = restaurant.name;
+  //   $scope.newFavorite.address = restaurant.address;
+  //   $scope.newFavorite.locality = restaurant.locality;
+  //   $scope.newFavorite.region = restaurant.region;
+  //   $scope.newFavorite.tel = restaurant.tel;
+  //   $scope.newFavorite.website = restaurant.website;
+  //   $scope.newFavorite.latitude = restaurant.latitude;
+  //   $scope.newFavorite.longitude = restaurant.longitude;
+  //   $scope.newFavorite.photoPath = restaurant.photoPath;
     
-    // refactor to look like this
-    // $scope.newFavorite = {
-    //   name: restaurant.name,
-    //   address: restaurant.address,
-    // }
+    // refactor of the above lines
+  $scope.addToFavorites = function(restaurant) {
+    $scope.newFavorite = {
+      uid: AuthFactory.getUser(),
+      name: restaurant.name,
+      address: restaurant.address,
+      locality: restaurant.locality,
+      region: restaurant.region,
+      tel: restaurant.tel,
+      website: restaurant.website,
+      latitude: restaurant.latitude,
+      longitude: restaurant.longitude,
+      photoPath: restaurant.photoPath  
+    }
+   
 
     console.log("THE NEW FAVOURITE IS: ", $scope.newFavorite)
     DatabaseFactory.postNewFavorite($scope.newFavorite);
