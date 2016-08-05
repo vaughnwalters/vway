@@ -7,7 +7,7 @@
 
 
 <h1>{{restaurants[0].locality}}</h1>
-<div class="row">
+<div class="row flexcontainer">
   <div class="col s12 m4 l3" ng-repeat="favorite in favorites | filter: searchFavorites">
     <div class="card">
       <div class="card-image waves-effect waves-block waves-light">
@@ -15,6 +15,7 @@
       </div>
       <div class="card-content">
         <span class="card-title activator grey-text text-darken-4">{{favorite.name}}<i class="material-icons right">more_vert</i></span>
+        <p>{{favorite.locality}}, {{favorite.region}}</p>
         <p><a href="" ng-click="removeFavorite(favorite.favoriteId)">Remove Favorite</a></p>
       </div>
       <div class="card-reveal">
