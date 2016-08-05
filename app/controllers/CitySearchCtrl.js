@@ -60,7 +60,6 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
       longitude: restaurant.longitude,
       photoPath: restaurant.photoPath  
     }
-
     DatabaseFactory.postNewFavorite($scope.newFavorite);
   };
 

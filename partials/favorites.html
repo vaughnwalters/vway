@@ -14,9 +14,8 @@
         <img class="activator" ng-src="{{favorite.photoPath}}">
       </div>
       <div class="card-content">
-        <span class="card-title activator grey-text text-darken-4">{{favorite.name}}<i class="material-icons right">more_vert</i></span>
-        <p>{{favorite.locality}}, {{favorite.region}}</p>
-        <p><a href="" ng-click="removeFavorite(favorite.favoriteId)">Remove Favorite</a></p>
+        <span class="card-title activator green-text text-darken-4">{{favorite.name}}<i class="material-icons right">more_vert</i></span>
+        <p>{{favorite.locality}}, {{favorite.region}}<a href="" ng-click="removeFavorite(favorite.favoriteId)"><i class="material-icons cyan-text text-darken-4 right">delete</i></a></p>
       </div>
       <div class="card-reveal">
         <span class="card-title green-text text-darken-4">{{restaurant.name}}<i class="material-icons right">close</i></span>
