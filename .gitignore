@@ -3,4 +3,7 @@ lib/bower_components
 lib/node_modules
 styles/
 app/values/FirebaseCreds.js
+app/values/GoogleCreds.js
+app/values/FactualCreds.js
 nashvilleFactualResponse.json
+nashvilleGooglePlacesResponse.json

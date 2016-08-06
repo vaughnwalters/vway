@@ -1,35 +1,60 @@
 "use strict";
 
-app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
+app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, GoogleCreds, FactualCreds){
 
 
 // *************************
 // COMMENT IN TO USE FACTUAL API (also CitySearchCtrl):
-
-
-
   // let getRestaurantList = (searchText) => {
+  //   console.log("FactualApi", FactualCreds.apiKey);
   //   let restaurantArray = []
-
+  //   let returnObjArray = null;
+  //   let count = 0;
   //     return $q(function(resolve, reject){
-  //       $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=OGnUmTnKEdWMoOCjiZjHbiXLShgS7WOzSX285RiR&q=${searchText}`
-  //         )
+  //       $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
+  //       )
+
 
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
-  let getRestaurantList = () => {
-      return $q(function(resolve, reject){
-        $http.get(`nashvilleFactualResponse.json`)
+    let getRestaurantList = () => { 
+        let returnObjArray = null;
+        let restaurantArray = [];
+        let count = 0;
+        return $q(function(resolve, reject){
+          $http.get(`nashvilleFactualResponse.json`)
 // *************************
+        .success(function(returnObject){ 
+          // push each item into array - will be an object with keyvalue pair 
+          returnObjArray = returnObject.response.data;
+          for (var i = 0; i < returnObjArray.length; i++) {
+            getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
+            .then(function(returnFromPlacesCall) {
+              // if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
+                let photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
+                let photoPath = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GoogleCreds.apiKey}`
+                returnObjArray[count].photoPath = photoPath;
+                restaurantArray.push(returnObjArray[count]);
+              // } else {
+              //   console.log("AVOCADO PICTURE INSTEAD");
+              // }
+              count++;
+              resolve(restaurantArray);
+            })
+          };
+        })
+        .error(function(error){
+          reject(error);
+      });  
+    }); 
+  };
+
+
+// HELPER FUNCTION FOR getRestaurantList
+  let getPhotoReference = (latitude, longitude, name) => {
+      return $q(function(resolve, reject){
+        $http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
           .success(function(returnObject){ 
-
-            // for each loop to call getphotoreference
-            // push each item into array - will be an object with keyvalue pair 
-            // of 
-
-
-            console.log("restaurants from DB", returnObject);
             resolve(returnObject);
-            // resolve the restaurantarray instead of returnobject
           })
           .error(function(error){
         reject(error);
@@ -38,42 +63,12 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
   };
 
 
-
-
-
-// *************************
-  // let getPhotoReference = (latitude, longitude) => {
-  //     return $q(function(resolve, reject){
-  //       $http.get(`google call pass in lat and long`
-  //         )
-
-
-  //         .success(function(returnObject){ 
-  //           console.log("restaurants from DB", returnObject);
-  //           resolve(returnObject);
-  //         })
-  //         .error(function(error){
-  //       reject(error);
-  //     });  
-  //   }); 
-  // };
-
-
-
-
-
-// let getPhoto = function() {
-
-// }
-
-
-
-
   let postNewFavorite = (newFavorite) => {
     return $q(function(resolve, reject){
       $http.post(`${FirebaseURL}/favorites.json`,
        JSON.stringify(newFavorite))
       .success(function(ObjFromFirebase){
+        console.log("FROM FIREBASE: ", ObjFromFirebase );
         let newFavoriteId = ObjFromFirebase.name;
         newFavorite.favoriteId = newFavoriteId;
         $http.patch(`${FirebaseURL}/favorites/${newFavoriteId}.json`, newFavorite);
@@ -85,11 +80,9 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
   let postComment = function(newComment, favoriteId) {
     console.log("newComment", newComment);
     return $q(function(resolve, reject){
-
       $http.patch(`${FirebaseURL}/favorites/${favoriteId}.json`,{ "comment": newComment});
     });
   };
-
 
 
   let getFavorites = function() {
@@ -111,12 +104,6 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
   };
 
 
-
-
-
-
-// DELETE FAVORITE FUNCTION
-
   let deleteFavorite = function(removeId){
     let boardUrl = FirebaseURL + "/favorites/" + removeId + ".json";
     return $q(function(resolve, reject){
@@ -127,10 +114,6 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory){
     });
   };
 
-
-
-
-// FOR THE LOVE OF GOD VAUGHN, REMEMBER TO EXPORT THESE FUNCTIONS
 
   return {getRestaurantList, postNewFavorite, getFavorites, deleteFavorite, postComment};
 });
