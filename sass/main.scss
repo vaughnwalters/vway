@@ -1,9 +1,13 @@
 .flexcontainer {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column; 
-  flex-direction: column;
-  -webkit-align-items: flex-start;
-  align-items: stretch;
-  flex-flow: row wrap;
+   display: -webkit-flex;
+   display: flex;
+   -webkit-align-items: center;
+   align-items: center;
+   -webkit-justify-content: center;
+   justify-content: center;
+   -webkit-flex-flow: column wrap;
+   flex-flow: column wrap;
+   -webkit-align-content: center;
+   align-content: center;
+
 }

@@ -6,7 +6,7 @@
 <button ng-click="searchDatabase(cityToSearch)">search</button>
 
 
-<h1>{{restaurants[0].locality}}</h1>
+<h1 ng-bind="cityToSearch"></h1>
 
 <div class="row">
   <div class="col s12 m4 l3" ng-repeat="restaurant in restaurants">
