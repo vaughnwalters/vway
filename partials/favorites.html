@@ -1,16 +1,16 @@
-<h1>favorites</h1> 
 
 <div ng-include="'partials/nav.html'"></div>
 
+<h1>favorites</h1> 
 <!-- filter favorites based on input -->
-<input type="text" ng-model="searchFavorites" placeholder="search Favorites">
+<!-- <input type="text" ng-model="searchFavorites" placeholder="search Favorites"> -->
 
 
 <h1>{{restaurants[0].locality}}</h1>
-<div class="flexcontainer">  
+<!-- <div class="flexcontainer">   -->
   <div class="row">
     <div class="col s12 m4 l3" ng-repeat="favorite in favorites | filter: searchFavorites">
-      <div class="card">
+      <div class="card hoverable">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" ng-src="{{favorite.photoPath}}">
         </div>
@@ -33,7 +33,7 @@
       </div>
     </div>  
   </div>  
-</div>
+<!-- </div> -->
 
 <!-- WITHOUT MATERIALIZE -->
 

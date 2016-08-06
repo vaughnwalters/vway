@@ -1,16 +1,16 @@
-<h1>city search</h1>
 
 <div ng-include="'partials/nav.html'"></div>
-
+<!-- 
 <input type="text" ng-model="cityToSearch" placeholder="City and State to search?">
 <button ng-click="searchDatabase(cityToSearch)">search</button>
-
+ -->
+<h1>city search</h1>
 
 <h1 ng-bind="cityToSearch"></h1>
 
 <div class="row">
   <div class="col s12 m4 l3" ng-repeat="restaurant in restaurants">
-    <div class="card large sticky-action">
+    <div class="card hoverable large sticky-action">
       <div class="card-image waves-effect waves-block waves-light card">
         <img class="activator" ng-src="{{restaurant.photoPath}}">
       </div>

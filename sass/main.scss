@@ -1,13 +1,4 @@
-.flexcontainer {
-   display: -webkit-flex;
-   display: flex;
-   -webkit-align-items: center;
-   align-items: center;
-   -webkit-justify-content: center;
-   justify-content: center;
-   -webkit-flex-flow: column wrap;
-   flex-flow: column wrap;
-   -webkit-align-content: center;
-   align-content: center;
-
-}
+@import "nav";
+@import "favorites";
+@import "loginRegister";
+@import "nav";
