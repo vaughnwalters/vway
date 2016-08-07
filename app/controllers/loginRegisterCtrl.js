@@ -42,7 +42,7 @@ app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
       console.log(result);
       // var user = result.user.uid;
       // console.log("AND THE LOGGED USER IS...", user.uid);
-      $location.url("/citySearch");
+      $location.url("/favorites");
       $scope.$apply();
     }).catch(function(error) {
       // Handle Errors here.

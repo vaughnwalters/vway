@@ -19,6 +19,9 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     "photoPath": ""
   };
 
+// add this search to the navbar
+
+
 // *******************************
 // COMMENT IN FOR USING FACTUAL (also DatabaseFactory.js):
   // $scope.searchDatabase = function (cityToSearch) {

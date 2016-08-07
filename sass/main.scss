@@ -1,4 +1,18 @@
 @import "nav";
 @import "favorites";
+@import "citySearch";
 @import "loginRegister";
 @import "nav";
+@import "index";
+
+.searchHeight {
+  z-index: 1;
+  input {
+    width: 100%;
+  }
+}
+
+.spaceFromNav {
+  top: 200px;
+  position: absolute;
+}

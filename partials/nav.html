@@ -1,39 +1,31 @@
 
 <div ng-controller="NavCtrl">
-  <nav class="green darken-2">
-    <div class="nav-wrapper green darken-2">
-      <a href="#/citySearch" class="brand-logo">VWAY</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li class="active"><a href="#/citySearch"><i class=" large material-icons">search</i></a></li>
-        <li class="active"><a href="#/favorites"><i class="large material-icons">thumb_up</i></a></li>
-        <li class="active"><a ng-click="logout()"><i class="large material-icons">lock_open </i></a></li>
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="#/citySearch">Search</a></li>
-        <li><a href="#/favorites">Favorites</a></li>
-        <li><a ng-click="logout()">Logout</a></li>
-      </ul>
-    </div>
-
-  <nav>
-    <div class="nav-wrapper green darken-2">
-      <form>
-        <div class="input-field">
-          <input id="search" type="search" placeholder="Enter City and State to search" ng-model="cityToSearch" required>
-          <label for="search"><i class="material-icons" ng-click="searchDatabase(cityToSearch)">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form>
-    </div>
-  </nav>
-<!-- 
+  <div class="navbar-fixed">
+    <nav class="green darken-1 navHeight">
+      <div class="nav-wrapper">
+        <a href="#/citySearch" class="brand-logo">VWAY</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li class="active"><a href="#/citySearch"><i class=" large material-icons">search</i></a></li>
+          <li class="active"><a href="#/favorites">
+          <i class="large material-icons">thumb_up</i>
+          </a></li>
+          <li class="active"><a ng-click="logout()"><i class="large material-icons">lock_open </i></a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="#/citySearch">Search</a></li>
+          <li><a href="#/favorites">Favorites</a></li>
+          <li><a ng-click="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+ <!-- 
 
 <input type="text" ng-model="cityToSearch" placeholder="City and State to search?">
-<button ng-click="searchDatabase(cityToSearch)">search</button> -->
+<button ng-click="searchDatabase(cityToSearch)">search</button>
 
 
 
-  </nav> 
 </div>
 

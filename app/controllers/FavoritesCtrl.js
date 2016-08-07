@@ -3,7 +3,7 @@
 app.controller("FavoritesCtrl", function($scope, $routeParams, DatabaseFactory, AuthFactory, FirebaseURL) {
 
 // MAKE ARRAY OF ALL FAVORITES WITH SAME ID AND ASSIGN IT TO VARIABLE FAVORITES
-  $scope.favorites = [];
+$scope.favorites = [];
 
 
 DatabaseFactory.getFavorites()
