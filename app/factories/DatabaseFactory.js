@@ -29,14 +29,14 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
           for (var i = 0; i < returnObjArray.length; i++) {
             getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
             .then(function(returnFromPlacesCall) {
-              // if (returnFromPlacesCall.results[0].photos[0].photo_reference) {
+              if (returnFromPlacesCall.results[0].photos) {
                 let photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
                 let photoPath = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GoogleCreds.apiKey}`
                 returnObjArray[count].photoPath = photoPath;
                 restaurantArray.push(returnObjArray[count]);
-              // } else {
-              //   console.log("AVOCADO PICTURE INSTEAD");
-              // }
+              } else {
+                console.log("AVOCADO PICTURE INSTEAD");
+              }
               count++;
               resolve(restaurantArray);
             })

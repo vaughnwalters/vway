@@ -23,7 +23,7 @@
   <input type="text" ng-model="cityToSearch" placeholder="City and State to search?">
   <button ng-click="searchDatabase(cityToSearch)">search</button>
  -->
-<div class="spaceFromNav">
+<div class="space-from-nav-search">
   <h1 ng-bind="cityToSearch"></h1>
 
   <div class="row">
@@ -33,15 +33,15 @@
           <img class="activator" ng-src="{{restaurant.photoPath}}">
         </div>
         <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">{{restaurant.name}}<i class="material-icons right">more_vert</i></span>  
-          <p><a href="" ng-click="addToFavorites(restaurant); toastAlert(restaurant.name)">Add to Favorites</a></p>
+          <span class="card-title activator grey-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">more_vert</i></span>  
+          <p><a href="" class="v-card-font" ng-click="addToFavorites(restaurant); toastAlert(restaurant.name)">Add to Favorites</a></p>
         <!-- add variable to scope and then pass it back to the toast -->
         <!-- ng-click alertToast(restaurant.name) -->
 
 
         </div>
-        <div class="card-reveal">
-          <span class="card-title green-text text-darken-4">{{restaurant.name}}<i class="material-icons right">close</i></span>
+        <div class="card-reveal v-card-font">
+          <span class="card-title green-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">close</i></span>
           <p>{{restaurant.address}}</p>
           <p>{{restaurant.locality}}, {{restaurant.region}}</p>
           <p>{{restaurant.tel}}</p>
