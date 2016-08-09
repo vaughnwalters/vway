@@ -22,16 +22,31 @@
 
 
 <div class="space-from-nav-fav">
-  <div class="row">
     <div class="flex-container">  
+  <div class="row">
       <div class="col s12 m4 l3" ng-repeat="favorite in favorites | filter: searchFavorites">
         <div class="card hoverable sticky-action">
           <div class="card-image waves-effect waves-block waves-light">
             <img class="activator" ng-src="{{favorite.photoPath}}">
           </div>
           <div class="card-content">
-            <span class="card-title activator green-text text-darken-4 v-card-title-font">{{favorite.name}}<i class="material-icons right">more_vert</i></span>
-            <p class="v-card-font">{{favorite.locality}}, {{favorite.region}}<a href="" ng-click="removeFavorite(favorite.favoriteId)"><i class="material-icons cyan-text text-darken-4 right">delete</i></a></p>
+            <span class="card-title activator green-text text-darken-4 v-card-title-font">{{favorite.name}}</span>
+            <p class="v-card-font">{{favorite.locality}}, {{favorite.region}}
+              <a href="" ng-click="removeFavorite(favorite.favoriteId)"><i class="material-icons cyan-text text-darken-4 right">delete</i>
+
+              
+
+
+              <a href="mailto:%20?subject=Here&#8217s%20a%20restaurant%20for%20ya%20from%20VWAY!&body=%0A{{favorite.name}}%0A{{favorite.address}}%0A{{favorite.locality}},{{favorite.region}}%0A%0A{{favorite.website}}%0A%0A{{favorite.tel}}%0A%0A{{favorite.comment}}"><i class="material-icons cyan-text text-darken-4 right">email</i></a>
+<!-- 
+
+              <a href="mailto:%20?subject=I&body={{favorite.name}}{{favorite.address}}{{favorite.locality}},{{favorite.region}}{{favorite.website}}{{favorite.comment}}"><i class="material-icons cyan-text text-darken-4 right">email</i></a>
+
+
+ -->
+
+              </a>
+            </p>
           </div>
           <div class="card-reveal v-card-font">
             <span class="card-title green-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">close</i></span>
