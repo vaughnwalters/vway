@@ -57,7 +57,11 @@
             <p><a target="_blank" ng-href="{{favorite.website}}">{{favorite.website}}</a></p>
             <div>
               <input type="text" placeholder="add comment" ng-model="favorite.comment"/>
-              <button ng-click="addComment(favorite.comment, favorite.favoriteId)">Save Comment</button>
+<!--               <button ng-click="addComment(favorite.comment, favorite.favoriteId)">Save Comment</button>
+ -->
+               <a href="" ng-click="addComment(favorite.comment, favorite.favoriteId)"><i class="material-icons cyan-text text-darken-4">note_add</i>
+
+
             </div>
           </div>
         </div>
@@ -65,3 +69,6 @@
     </div>  
   </div>
 </div>
+
+
+
