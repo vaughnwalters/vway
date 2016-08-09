@@ -18,3 +18,10 @@
 .v-card-font {
   font-family: 'EB Garamond', serif;
 }
+
+.flex-container {
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}

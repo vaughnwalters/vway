@@ -1,8 +1,6 @@
-
-<div ng-include="'partials/nav.html'"></div>
-
+<div ng-include="'partials/nav.html'">
+</div>
 <div class="searchDiv navbar-fixed">
-  
   <nav class="searchHeight">
     <div class="nav-wrapper green darken-3">
       <form>
@@ -15,39 +13,34 @@
     </div>
   </nav>
 </div>
-
-
-
-
- <!--  
+<!--  
   <input type="text" ng-model="cityToSearch" placeholder="City and State to search?">
   <button ng-click="searchDatabase(cityToSearch)">search</button>
  -->
 <div class="space-from-nav-search">
   <h1 ng-bind="cityToSearch"></h1>
-
   <div class="row">
-    <div class="col s12 m4 l3" ng-repeat="restaurant in restaurants">
-      <div class="card hoverable sticky-action">
-        <div class="card-image waves-effect waves-block waves-light card">
-          <img class="activator" ng-src="{{restaurant.photoPath}}">
-        </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">more_vert</i></span>  
-          <p><a href="" class="v-card-font" ng-click="addToFavorites(restaurant); toastAlert(restaurant.name)">Add to Favorites</a></p>
-        <!-- add variable to scope and then pass it back to the toast -->
-        <!-- ng-click alertToast(restaurant.name) -->
-
-
-        </div>
-        <div class="card-reveal v-card-font">
-          <span class="card-title green-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">close</i></span>
-          <p>{{restaurant.address}}</p>
-          <p>{{restaurant.locality}}, {{restaurant.region}}</p>
-          <p>{{restaurant.tel}}</p>
-          <p><a target="_blank" ng-href="{{restaurant.website}}">{{restaurant.website}}</a></p>
+    <div class="flex-container">
+      <div class="col s12 m4 l3" ng-repeat="restaurant in restaurants">
+        <div class="card hoverable sticky-action">
+          <div class="card-image waves-effect waves-block waves-light card">
+            <img class="activator" ng-src="{{restaurant.photoPath}}">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">more_vert</i></span>
+            <p><a href="" class="v-card-font" ng-click="addToFavorites(restaurant); toastAlert(restaurant.name)">Add to Favorites</a></p>
+            <!-- add variable to scope and then pass it back to the toast -->
+            <!-- ng-click alertToast(restaurant.name) -->
+          </div>
+          <div class="card-reveal v-card-font">
+            <span class="card-title green-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">close</i></span>
+            <p>{{restaurant.address}}</p>
+            <p>{{restaurant.locality}}, {{restaurant.region}}</p>
+            <p>{{restaurant.tel}}</p>
+            <p><a target="_blank" ng-href="{{restaurant.website}}">{{restaurant.website}}</a></p>
+          </div>
         </div>
       </div>
     </div>
-  </div> 
-</div> 
+  </div>
+</div>
