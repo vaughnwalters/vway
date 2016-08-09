@@ -54,6 +54,7 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
       return $q(function(resolve, reject){
         $http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
           .success(function(returnObject){ 
+            console.log("returnObject", returnObject);
             resolve(returnObject);
           })
           .error(function(error){
