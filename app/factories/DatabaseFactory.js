@@ -19,7 +19,7 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
     let getRestaurantList = () => { 
         let returnObjArray = null;
         let restaurantArray = [];
-        let count = 0;
+        // let count = 0;
         return $q(function(resolve, reject){
           $http.get(`nashvilleFactualResponse.json`)
 // *************************
@@ -27,19 +27,22 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
           // push each item into array - will be an object with keyvalue pair 
           returnObjArray = returnObject.response.data;
           for (var i = 0; i < returnObjArray.length; i++) {
-            getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
-            .then(function(returnFromPlacesCall) {
-              if (returnFromPlacesCall.results[0].photos) {
-                let photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
-                let photoPath = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GoogleCreds.apiKey}`
-                returnObjArray[count].photoPath = photoPath;
-                restaurantArray.push(returnObjArray[count]);
-              } else {
-                console.log("AVOCADO PICTURE INSTEAD");
-              }
-              count++;
-              resolve(restaurantArray);
-            })
+            (function (i) { 
+              getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
+              .then(function(returnFromPlacesCall) {
+                if (returnFromPlacesCall.results[0].photos) {
+                  let photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
+                  let photoPath = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GoogleCreds.apiKey}`
+                  returnObjArray[i].photoPath = photoPath;
+                  restaurantArray.push(returnObjArray[i]);
+                } else {
+                  // console.log("AVOCADO PICTURE INSTEAD");
+                  returnObjArray[i].photoPath = 
+                }
+                // count++;
+                resolve(restaurantArray);
+              })
+            })(i)
           };
         })
         .error(function(error){
