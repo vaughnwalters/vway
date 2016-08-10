@@ -5,23 +5,23 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
 
 // *************************
 // COMMENT IN TO USE FACTUAL API (also CitySearchCtrl):
-  // let getRestaurantList = (searchText) => {
-  //   console.log("FactualApi", FactualCreds.apiKey);
-  //   let restaurantArray = []
-  //   let returnObjArray = null;
-  //   let count = 0;
-  //     return $q(function(resolve, reject){
-  //       $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
-  //       )
+  let getRestaurantList = (searchText) => {
+    console.log("FactualApi", FactualCreds.apiKey);
+    let restaurantArray = []
+    let returnObjArray = null;
+    let count = 0;
+      return $q(function(resolve, reject){
+        $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
+        )
 
 
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
-    let getRestaurantList = () => { 
-        let returnObjArray = null;
-        let restaurantArray = [];
-        // let count = 0;
-        return $q(function(resolve, reject){
-          $http.get(`nashvilleFactualResponse.json`)
+    // let getRestaurantList = () => { 
+    //     let returnObjArray = null;
+    //     let restaurantArray = [];
+    //     // let count = 0;
+    //     return $q(function(resolve, reject){
+    //       $http.get(`nashvilleFactualResponse.json`)
 // *************************
         .success(function(returnObject){ 
           // push each item into array - will be an object with keyvalue pair 
@@ -34,12 +34,12 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
                   let photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
                   let photoPath = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GoogleCreds.apiKey}`
                   returnObjArray[i].photoPath = photoPath;
-                  restaurantArray.push(returnObjArray[i]);
                 } else {
                   // console.log("AVOCADO PICTURE INSTEAD");
-                  returnObjArray[i].photoPath = 
+                  returnObjArray[i].photoPath = `images/avocado.png`
                 }
                 // count++;
+                restaurantArray.push(returnObjArray[i]);
                 resolve(restaurantArray);
               })
             })(i)
