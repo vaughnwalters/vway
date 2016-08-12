@@ -23,8 +23,8 @@
 
 <div class="space-from-nav-fav full-width">
   <div class="row">
-    <div class="flex-container full-width">  
-      <div class="col s12 m4 l3" ng-repeat="favorite in favorites | filter: searchFavorites">
+    <div class="flex-container flex-container-width">  
+      <div class="col s12 m4" ng-repeat="favorite in favorites | filter: searchFavorites">
         <div class="card hoverable sticky-action">
           <div class="card-image waves-effect waves-block waves-light">
             <img class="activator" ng-src="{{favorite.photoPath}}">
@@ -38,14 +38,10 @@
 
 
               <a href="mailto:%20?subject=Here&#8217s%20a%20restaurant%20for%20ya%20from%20VWAY!&body=%0A{{favorite.name}}%0A{{favorite.address}}%0A{{favorite.locality}},{{favorite.region}}%0A%0A{{favorite.website}}%0A%0A{{favorite.tel}}%0A%0A{{favorite.comment}}"><i class="material-icons cyan-text text-darken-4 right">email</i></a>
-<!-- 
 
-              <a href="mailto:%20?subject=I&body={{favorite.name}}{{favorite.address}}{{favorite.locality}},{{favorite.region}}{{favorite.website}}{{favorite.comment}}"><i class="material-icons cyan-text text-darken-4 right">email</i></a>
-
-
- -->
 
               </a>
+
             </p>
           </div>
           <div class="card-reveal v-card-font">
@@ -59,7 +55,11 @@
               <input type="text" placeholder="add comment" ng-model="favorite.comment"/>
 <!--               <button ng-click="addComment(favorite.comment, favorite.favoriteId)">Save Comment</button>
  -->
-               <a href="" ng-click="addComment(favorite.comment, favorite.favoriteId)"><i class="material-icons cyan-text text-darken-4">note_add</i>
+              <a href="" ng-click="addComment(favorite.comment, favorite.favoriteId)"><i class="material-icons cyan-text text-darken-4">note_add</i></a>
+
+              <div class="card-image">
+                <img src="http://maps.googleapis.com/maps/api/staticmap?center={{favorite.latitude}},+{{favorite.longitude}}&zoom=13&scale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C{{favorite.latitude}},+{{favorite.longitude}}" alt="Google Map of {{favorite.latitude}}, {{favorite.longitude}}">
+              </div>
 
 
             </div>
