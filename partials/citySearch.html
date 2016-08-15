@@ -5,7 +5,7 @@
     <div class="nav-wrapper green darken-3">
       <form>
         <div class="input-field">
-          <input id="search" type="search" ng-model="cityToSearch" placeholder="Enter city and state to search for grub!" ng-keyup="$event.which === 13 && searchDatabase(cityToSearch)" required autofocus>
+          <input class="v-card-title-font" id="search" type="search" ng-model="cityToSearch" placeholder="Enter city and state to search for grub!" ng-keyup="$event.which === 13 && searchDatabase(cityToSearch)" required autofocus>
           <label for="search"><i class="material-icons" ng-click="searchDatabase(cityToSearch)">search</i></label>
           <i class="material-icons">close</i>
         </div>
@@ -18,7 +18,7 @@
   <button ng-click="searchDatabase(cityToSearch)">search</button>
  -->
 <div class="space-from-nav-search">
-  <h1 ng-bind="cityToSearch"></h1>
+  <h1 class="v-card-title-font" ng-bind="cityToSearch"></h1>
   <div class="row">
     <div class="flex-container flex-container-width">
       <div class="col s12 m4 v-inner-padding" ng-repeat="restaurant in restaurants">
