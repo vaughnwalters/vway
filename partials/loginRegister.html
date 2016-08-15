@@ -1,14 +1,56 @@
+<div class="row">
+      <div class="row">
+        <div class="col s4 offset s4">
+          <a class="waves-effect waves-light btn green darken-3" ng-click="activateRegisterMode()">register</a>
+        </div>
+      </div>  
 
-<h3>login</h3>
-<input type="text" placeholder="email" ng-model="loginData.email">
-<input type="password" placeholder="password" ng-model="loginData.password">
-<button ng-click="loginEmail()">Login</button>
+      <div class="row">
+        <div class="col s4">
+          <a class="waves-effect waves-light btn green darken-3" ng-click="activateLoginMode()">login</a>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col s4">
+          <button class="waves-effect waves-light btn green darken-3" ng-click="loginGoogle()">login Google</button>
+        </div>
+      </div>
 
-<h3>register</h3>
-<input type="text" placeholder="email" ng-model="registerData.email">
-<input type="password" placeholder="password" ng-model="registerData.password">
-<button ng-click="registerEmail()">Register</button>
 
-<div>
-  <button ng-click="loginGoogle()">Login Google</button>
+
+<!-- REGISTER -->
+  <form class="col s8 offset-s2" ng-show="registerMode">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" class="validate" ng-model="registerData.email">
+        <label for="email">Email</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="password" type="password" class="validate" ng-model="registerData.password">
+        <label for="password">Password</label>
+      </div>
+    </div>
+
+    <div class="row"><div class="center-align"><button class="btn waves-effect waves-light green darken-3" ng-click="registerEmail()">Register<i class="material-icons right">send</i></button></div></div>
+  </form>
+
+
+<!-- LOGIN -->
+  <form class="col s8 offset-s2" ng-show="loginMode">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" class="validate" ng-model="loginData.email">
+        <label for="email">Email</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="password" type="password" class="validate" ng-model="loginData.password">
+        <label for="password">Password</label>
+      </div>
+    </div>
+
+    <div class="row"><div class="center-align"><button class="btn waves-effect waves-light green darken-3">Login<i class="material-icons right">send</i></button></div></div>
+  </form>
+
+  
 </div>

@@ -12,6 +12,21 @@ app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
     password: ""
   };
 
+  $scope.registerMode = false;
+
+  $scope.loginMode = false;
+
+  $scope.activateRegisterMode = function() {
+    $scope.loginMode = false;
+    $scope.registerMode = true;
+  };
+
+  $scope.activateLoginMode = function() {
+    $scope.registerMode = false;
+    $scope.loginMode = true;
+  };
+
+
   // register function
 
   $scope.registerEmail = function() {
@@ -55,5 +70,6 @@ app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
       // ...
     });
   };
+
 
 });  
