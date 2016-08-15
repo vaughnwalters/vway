@@ -3,7 +3,10 @@
 app.controller("NavCtrl", function ($scope, AuthFactory, DatabaseFactory, $routeParams, $location) {
   
 $(document).ready(function(){
-  $(".button-collapse").sideNav();
+  $(".button-collapse").sideNav(
+    {
+      closeOnClick: true
+  })
 });
 
   $scope.restaurants = [];
