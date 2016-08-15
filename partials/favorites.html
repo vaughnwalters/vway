@@ -32,7 +32,7 @@
           <div class="card-content">
             <span class="card-title activator green-text text-darken-4 v-card-title-font">{{favorite.name}}</span>
             <p class="v-card-font">{{favorite.locality}}, {{favorite.region}}
-              <a href="" ng-click="removeFavorite(favorite.favoriteId)"><i class="material-icons cyan-text text-darken-4 right">delete</i>
+              <a href="" ng-click="removeFavorite(favorite.favoriteId); removeFavoriteToast(favorite.name)"><i class="material-icons cyan-text text-darken-4 right">delete</i>
 
               
 
@@ -52,10 +52,10 @@
             <p>{{favorite.tel}}</p>
             <p><a target="_blank" ng-href="{{favorite.website}}">{{favorite.website}}</a></p>
             <div>
-              <input type="text" placeholder="add comment" ng-model="favorite.comment"/>
+              <input type="text" placeholder="add comment" ng-model="favorite.comment" ng-keyup="$event.which === 13 && addComment(favorite.comment, favorite.favoriteId); $event.which === 13 && addCommentToast()">
 <!--               <button ng-click="addComment(favorite.comment, favorite.favoriteId)">Save Comment</button>
  -->
-              <a href="" ng-click="addComment(favorite.comment, favorite.favoriteId)"><i class="material-icons cyan-text text-darken-4">note_add</i></a>
+              <a href="" ng-click="addComment(favorite.comment, favorite.favoriteId); addCommentToast()"><i class="material-icons cyan-text text-darken-4">note_add</i></a>
 
               <div class="card-image">
                 <img src="http://maps.googleapis.com/maps/api/staticmap?center={{favorite.latitude}},+{{favorite.longitude}}&zoom=14&scale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C{{favorite.latitude}},+{{favorite.longitude}}" alt="Google Map of {{favorite.latitude}}, {{favorite.longitude}}">

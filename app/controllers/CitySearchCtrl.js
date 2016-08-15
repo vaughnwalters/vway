@@ -67,8 +67,10 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     DatabaseFactory.postNewFavorite($scope.newFavorite);
   };
 
-  $scope.toastAlert = function(restaurantName) {
+  $scope.favoriteAddedToast = function(restaurantName) {
     Materialize.toast(restaurantName + " added to favorites", 1500);
   };
+
+  
 
 });

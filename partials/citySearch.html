@@ -29,13 +29,13 @@
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4 v-card-title-font">{{restaurant.name}}</span>
             <p>
-              <a href="" class="v-card-font" ng-click="addToFavorites(restaurant); activateFavoriteMode(restaurant); toastAlert(restaurant.name)">
+              <a href="" class="v-card-font" ng-click="addToFavorites(restaurant); activateFavoriteMode(restaurant); favoriteAddedToast(restaurant.name)">
                 <img ng-show="!restaurant.isFavorite" ng-src="images/heart-outline.png">
                 <img ng-show="restaurant.isFavorite" ng-src="images/heart.png">
               </a>
             </p>
             <!-- add variable to scope and then pass it back to the toast -->
-            <!-- ng-click alertToast(restaurant.name) -->
+            <!-- ng-click favoriteAddedToast(restaurant.name) -->
           </div>
           <div class="card-reveal v-card-font">
             <span class="card-title green-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">close</i></span>

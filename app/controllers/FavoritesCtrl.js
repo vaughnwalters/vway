@@ -33,5 +33,13 @@ $scope.addComment = function(inputComment, favoriteId) {
       });     
   };
 
+  // REMOVE FAVORITE TOAST
+  $scope.removeFavoriteToast = function(restaurantName) {
+    Materialize.toast(restaurantName + " was removed from your favorites", 1500);
+  };
+
+  $scope.addCommentToast = function () {
+    Materialize.toast("comment saved!", 1000);
+  }
 
 });
