@@ -39,7 +39,8 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
                   // console.log("AVOCADO PICTURE INSTEAD");
                   returnObjArray[i].photoPath = `images/avocado.png`
                 }
-                // count++;
+                // set favorite to false for heart icon
+                returnObjArray[i].isFavorite = false;
                 restaurantArray.push(returnObjArray[i]);
                 resolve(restaurantArray);
               })

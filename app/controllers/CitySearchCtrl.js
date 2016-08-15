@@ -37,6 +37,20 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     });  
   };
 
+
+
+// To change heart to full
+
+  // $scope.favoriteMode = false;
+
+  $scope.activateFavoriteMode = function(restaurant) {
+    // $scope.favoriteMode = true;
+    restaurant.isFavorite = true;
+  };
+
+
+
+
   $scope.addToFavorites = function(restaurant) {
     $scope.newFavorite = {
       uid: AuthFactory.getUser(),

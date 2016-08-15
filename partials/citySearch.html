@@ -27,8 +27,13 @@
             <img class="activator" ng-src="{{restaurant.photoPath}}">
           </div>
           <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">more_vert</i></span>
-            <p><a href="" class="v-card-font" ng-click="addToFavorites(restaurant); toastAlert(restaurant.name)">Add to Favorites</a></p>
+            <span class="card-title activator grey-text text-darken-4 v-card-title-font">{{restaurant.name}}</span>
+            <p>
+              <a href="" class="v-card-font" ng-click="addToFavorites(restaurant); activateFavoriteMode(restaurant); toastAlert(restaurant.name)">
+                <img ng-show="!restaurant.isFavorite" ng-src="images/heart-outline.png">
+                <img ng-show="restaurant.isFavorite" ng-src="images/heart.png">
+              </a>
+            </p>
             <!-- add variable to scope and then pass it back to the toast -->
             <!-- ng-click alertToast(restaurant.name) -->
           </div>
