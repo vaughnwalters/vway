@@ -5,12 +5,10 @@
 @import "nav";
 @import "index";
 
-// .searchHeight {
-//   z-index: 1;
-//   input {
-//     width: 100%;
-//   }
-// }
+body {
+  background-color: #FFFFDB;
+}
+
 .v-card-title-font {
   font-family: 'Quicksand', sans-serif;
 }
@@ -47,4 +45,8 @@
 
 .search-font {
   font-family: 'EB Garamond', serif;
+}
+
+.cream {
+  background-color: #FFFFDB;
 }
