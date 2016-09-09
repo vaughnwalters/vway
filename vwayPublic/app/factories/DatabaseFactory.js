@@ -15,7 +15,7 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
         )
 
 // call the node server here
-        $http.get(`http://nodeserver/t/restaurants blah blah blah (NO api key here)`)
+        // $http.get(`http://nodeserver/t/restaurants blah blah blah (NO api key here)`)
 
 
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
