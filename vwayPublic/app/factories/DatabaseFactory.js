@@ -5,23 +5,26 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
 
 // *************************
 // COMMENT IN TO USE FACTUAL API (also CitySearchCtrl):
-  // let getRestaurantList = (searchText) => {
-  //   console.log("FactualApi", FactualCreds.apiKey);
-  //   let restaurantArray = []
-  //   let returnObjArray = null;
-  //   let count = 0;
-  //     return $q(function(resolve, reject){
-  //       $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
-  //       )
+  let getRestaurantList = (searchText) => {
+    console.log("FactualApi", FactualCreds.apiKey);
+    let restaurantArray = []
+    let returnObjArray = null;
+    let count = 0;
+      return $q(function(resolve, reject){
+        $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
+        )
+
+// call the node server here
+        // $http.get(`http://nodeserver/t/restaurants blah blah blah (NO api key here)`)
 
 
 // COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
-    let getRestaurantList = () => { 
-        let returnObjArray = null;
-        let restaurantArray = [];
-        // let count = 0;
-        return $q(function(resolve, reject){
-          $http.get(`nashvilleFactualResponse.json`)
+    // let getRestaurantList = () => { 
+    //     let returnObjArray = null;
+    //     let restaurantArray = [];
+    //     // let count = 0;
+    //     return $q(function(resolve, reject){
+    //       $http.get(`nashvilleFactualResponse.json`)
 // *************************
         .success(function(returnObject){ 
           // push each item into array - will be an object with keyvalue pair 

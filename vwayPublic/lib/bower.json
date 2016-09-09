@@ -1,0 +1,23 @@
+{
+  "name": "lib",
+  "authors": [
+    "Vaughn Walters <vaughnwalters@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-route": "^1.5.7",
+    "angularfire": "^2.0.1",
+    "firebase": "^3.2.0"
+  }
+}
