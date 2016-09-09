@@ -1,0 +1,74 @@
+
+<div ng-include="'partials/nav.html'"></div>
+
+<div class="favDiv navbar-fixed">
+
+  <nav class="searchHeight">
+    <div class="nav-wrapper green darken-3">
+      <form>
+        <div class="input-field">
+          <input class="v-card-title-font" id="search" type="search" placeholder="Search your favorites for some tasty snacks!" ng-model="searchFavorites" required>
+          <!-- <label for="search"><i class="material-icons" ng-click="searchDatabase(cityToSearch)">search</i></label> -->
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
+</div>
+
+
+<!-- 
+  <input type="text" ng-model="searchFavorites" placeholder="search Favorites"> -->
+
+
+<div class="space-from-nav-fav full-width">
+  <div class="row">
+    <div class="flex-container flex-container-width">  
+      <div class="col s12 m4 align-left" ng-repeat="favorite in favorites | filter: searchFavorites">
+        <div class="card hoverable sticky-action">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" ng-src="{{favorite.photoPath}}">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator green-text text-darken-4 v-card-title-font">{{favorite.name}}</span>
+            <p class="v-card-font">{{favorite.locality}}, {{favorite.region}}
+              <a href="" ng-click="removeFavorite(favorite.favoriteId); removeFavoriteToast(favorite.name)"><i class="material-icons cyan-text text-darken-4 right">delete</i>
+
+              
+
+
+              <a href="mailto:%20?subject=Here&#8217s%20a%20restaurant%20for%20ya%20from%20VWAY!&body=%0A{{favorite.name}}%0A{{favorite.address}}%0A{{favorite.locality}},{{favorite.region}}%0A%0A{{favorite.website}}%0A%0A{{favorite.tel}}%0A%0A{{favorite.comment}}"><i class="material-icons cyan-text text-darken-4 right">email</i></a>
+
+
+              </a>
+
+            </p>
+          </div>
+          <div class="card-reveal v-card-font">
+            <span class="card-title green-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">close</i></span>
+            <p>{{favorite.name}}</p>
+            <p>{{favorite.address}}</p>
+            <p>{{favorite.locality}}, {{favorite.region}}</p>
+            <p>{{favorite.tel}}</p>
+            <p><a target="_blank" ng-href="{{favorite.website}}">{{favorite.website}}</a></p>
+            <div>
+              <input type="text" placeholder="add comment" ng-model="favorite.comment" ng-keyup="$event.which === 13 && addComment(favorite.comment, favorite.favoriteId); $event.which === 13 && addCommentToast()">
+<!--               <button ng-click="addComment(favorite.comment, favorite.favoriteId)">Save Comment</button>
+ -->
+              <a href="" ng-click="addComment(favorite.comment, favorite.favoriteId); addCommentToast()"><i class="material-icons cyan-text text-darken-4">note_add</i></a>
+
+              <div class="card-image">
+                <img src="http://maps.googleapis.com/maps/api/staticmap?center={{favorite.latitude}},+{{favorite.longitude}}&zoom=14&scale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C{{favorite.latitude}},+{{favorite.longitude}}" alt="Google Map of {{favorite.latitude}}, {{favorite.longitude}}">
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>  
+  </div>
+</div>
+
+
+

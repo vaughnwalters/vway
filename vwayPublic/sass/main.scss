@@ -1,0 +1,56 @@
+@import "nav";
+@import "favorites";
+@import "citySearch";
+@import "loginRegister";
+@import "nav";
+@import "index";
+
+body {
+  background-color: #FFFFDB;
+}
+
+.v-card-title-font {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.v-card-font {
+  font-family: 'EB Garamond', serif;
+}
+
+.flex-container {
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  // justify-content: flex-start;
+  // align-content: flex-start;
+}
+
+.line-height {
+  line-height: 80%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.flex-container-width {
+  width: 90%;
+  margin: auto;
+}
+
+.v-inner-padding {
+    padding: 1% 2% !important;
+}
+
+.search-font {
+  font-family: 'EB Garamond', serif;
+}
+
+.cream {
+  background-color: #FFFFDB;
+}
+
+.align-left {
+  margin-left: 0 !important;
+}
