@@ -1,0 +1,59 @@
+<div ng-include="'partials/nav.html'">
+</div>
+<div class="searchDiv navbar-fixed">
+  <nav class="searchHeight">
+    <div class="nav-wrapper green darken-3">
+      <form>
+        <div class="input-field">
+          <input class="v-card-title-font" id="search" type="search" ng-model="cityToSearch" placeholder="Enter city and state to search for grub!" ng-keyup="$event.which === 13 && searchDatabase(cityToSearch)" required autofocus>
+          <label for="search"><i class="material-icons" ng-click="searchDatabase(cityToSearch)">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
+</div>
+<!--  
+  <input type="text" ng-model="cityToSearch" placeholder="City and State to search?">
+  <button ng-click="searchDatabase(cityToSearch)">search</button>
+ -->
+<div class="space-from-nav-search">
+  <h1 class="v-card-title-font" ng-bind="cityToSearch"></h1>
+  <div class="row">
+    <div class="flex-container flex-container-width">
+      <div class="col s12 m4 v-inner-padding align-left" ng-repeat="restaurant in restaurants">
+        <div class="card hoverable sticky-action">
+          <div class="card-image waves-effect waves-block waves-light card">
+            <img class="activator" ng-src="{{restaurant.photoPath}}">
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4 v-card-title-font">{{restaurant.name}}</span>
+            <p>
+              <a href="" class="v-card-font" ng-click="addToFavorites(restaurant); activateFavoriteMode(restaurant); favoriteAddedToast(restaurant.name)">
+                <img ng-show="!restaurant.isFavorite" ng-src="images/heart-outline.png">
+                <img ng-show="restaurant.isFavorite" ng-src="images/heart.png">
+              </a>
+            </p>
+            <!-- add variable to scope and then pass it back to the toast -->
+            <!-- ng-click favoriteAddedToast(restaurant.name) -->
+          </div>
+          <div class="card-reveal v-card-font">
+            <span class="card-title green-text text-darken-4 v-card-title-font">{{restaurant.name}}<i class="material-icons right">close</i></span>
+            <p>{{restaurant.address}}</p>
+            <p>{{restaurant.locality}}, {{restaurant.region}}</p>
+            <p>{{restaurant.tel}}</p>
+            <p><a target="_blank" ng-href="{{restaurant.website}}">{{restaurant.website}}</a></p>
+
+<!-- MAP -->
+
+           <div class="card-image">
+              <img src="http://maps.googleapis.com/maps/api/staticmap?center={{restaurant.latitude}},+{{restaurant.longitude}}&zoom=14&scale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C{{restaurant.latitude}},+{{restaurant.longitude}}" alt="Google Map of {{restaurant.latitude}}, {{restaurant.longitude}}">
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
