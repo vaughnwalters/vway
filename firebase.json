@@ -1,0 +1,14 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "public": "vwayPublic",
+    "rewrites": [
+      {
+        "source": "**.html",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

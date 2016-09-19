@@ -13,8 +13,8 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
       return $q(function(resolve, reject){
     // without node server
         // $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
-    $http.get(`http://localhost:6660/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&q=${searchText}`
-        // $http.get(`https://vwayfactualproxy.herokuapp.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&q=${searchText}`
+    // $http.get(`http://localhost:6660/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&q=${searchText}`
+        $http.get(`https://vwayfactualproxy.herokuapp.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&q=${searchText}`
         )
 
                                             // /t/restaurants-us?filters={%22$and%22:[{%22cuisine%22:{%22$includes%22:%22vegan%22}}]}&q=honolulu%20hi
@@ -66,8 +66,8 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
         // using google maps
         // $http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
         // using localhost server
-        // $http.get(`https://vwayfactualproxy.herokuapp.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
-        $http.get(`http://localhost:6660/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
+        $http.get(`https://vwayfactualproxy.herokuapp.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
+        // $http.get(`http://localhost:6660/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
         
 
           .success(function(returnObject){ 
