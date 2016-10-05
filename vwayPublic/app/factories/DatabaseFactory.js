@@ -7,6 +7,13 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
 // COMMENT IN TO USE FACTUAL API (also CitySearchCtrl):
   let getRestaurantList = (searchText) => {
     console.log("FactualApi", FactualCreds.apiKey);
+
+
+   // adding active class to spinner
+   let spinnerDiv = angular.element('.search-spinner');
+   spinnerDiv.addClass('active');
+
+
     let restaurantArray = []
     let returnObjArray = null;
     let count = 0;
@@ -52,6 +59,7 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
               })
             })(i)
           };
+          spinnerDiv.removeClass('active');
         })
         .error(function(error){
           reject(error);
