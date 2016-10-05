@@ -17,8 +17,21 @@
   <input type="text" ng-model="cityToSearch" placeholder="City and State to search?">
   <button ng-click="searchDatabase(cityToSearch)">search</button>
  -->
+
 <div class="space-from-nav-search">
   <h1 class="v-card-title-font" ng-bind="cityToSearch"></h1>
+  <!-- spinner -->
+  <div class="preloader-wrapper small search-spinner">
+    <div class="spinner-layer spinner-green-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div> 
   <div class="row">
     <div class="flex-container flex-container-width">
       <div class="col s12 m4 v-inner-padding align-left" ng-repeat="restaurant in restaurants">
