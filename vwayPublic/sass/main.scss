@@ -59,3 +59,25 @@ body {
   display: block;
    margin: auto;
 }
+
+.vway-title {
+  position: relative;
+  height: 56px;
+  z-index: 995;
+}
+
+.vway-title nav {
+  position: fixed;
+}
+
+.v-navbar-search {
+  position: relative;
+  height: 56px;
+  z-index: 996;
+}
+
+.v-navbar-search nav {
+  position: fixed;
+}
+
+
