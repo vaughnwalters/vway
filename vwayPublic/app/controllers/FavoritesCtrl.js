@@ -8,22 +8,18 @@ $scope.favorites = [];
 
 DatabaseFactory.getFavorites()
   .then(function(favorites) {
-    console.log("favorites", favorites);
     $scope.favorites = favorites;
 });
 
 
 // ADD COMMENT FUNCTION
 $scope.addComment = function(inputComment, favoriteId) {
-  console.log("inputComment", inputComment);
-  console.log("favoriteId", favoriteId);
   DatabaseFactory.postComment(inputComment, favoriteId);
 };
 
 
 // REMOVE FAVORITE FUNCTION
   $scope.removeFavorite = function(removeId) {
-    console.log("removing: ", removeId);
     DatabaseFactory.deleteFavorite(removeId)
       .then(function(){
         DatabaseFactory.getFavorites()
@@ -33,13 +29,17 @@ $scope.addComment = function(inputComment, favoriteId) {
       });     
   };
 
+
   // REMOVE FAVORITE TOAST
   $scope.removeFavoriteToast = function(restaurantName) {
     Materialize.toast(restaurantName + " was removed from your favorites", 1500);
   };
 
+
+  // ADD COMMENT TOAST
   $scope.addCommentToast = function () {
     Materialize.toast("comment saved!", 1000);
   }
+
 
 });

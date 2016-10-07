@@ -13,10 +13,6 @@
     </div>
   </nav>
 </div>
-<!--  
-  <input type="text" ng-model="cityToSearch" placeholder="City and State to search?">
-  <button ng-click="searchDatabase(cityToSearch)">search</button>
- -->
 
 <div class="space-from-nav-search">
   <h1 class="v-card-title-font" ng-bind="cityToSearch"></h1>
@@ -56,15 +52,11 @@
             <p>{{restaurant.locality}}, {{restaurant.region}}</p>
             <p>{{restaurant.tel}}</p>
             <p><a target="_blank" ng-href="{{restaurant.website}}">{{restaurant.website}}</a></p>
-
-<!-- MAP -->
-
-           <div class="card-image">
+            <!-- MAP -->
+            <div class="card-image">
               <img src="http://maps.googleapis.com/maps/api/staticmap?center={{restaurant.latitude}},+{{restaurant.longitude}}&zoom=14&scale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C{{restaurant.latitude}},+{{restaurant.longitude}}" alt="Google Map of {{restaurant.latitude}}, {{restaurant.longitude}}">
             </div>
           </div>
-
-
         </div>
       </div>
     </div>

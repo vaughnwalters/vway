@@ -2,10 +2,6 @@
 
 var app = angular.module("vway", ["ngRoute"])
 .constant("FirebaseURL", "https://vway-aff34.firebaseio.com");
-// .constant("FirebaseURL", "https://vway-7b92e.firebaseio.com");
-
-
-
 
 
 app.config(function($routeProvider, FBCreds) {
@@ -14,6 +10,7 @@ app.config(function($routeProvider, FBCreds) {
     authDomain: FBCreds.authDomain
   };
   firebase.initializeApp(authConfig);
+
 
   $routeProvider
     .when('/', {
@@ -29,4 +26,6 @@ app.config(function($routeProvider, FBCreds) {
       controller: "FavoritesCtrl"
     })
     .otherwise('/');
+
+
 });

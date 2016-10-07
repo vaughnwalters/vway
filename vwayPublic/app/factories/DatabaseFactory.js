@@ -2,54 +2,35 @@
 
 app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, GoogleCreds, FactualCreds){
 
-
-// *************************
-// COMMENT IN TO USE FACTUAL API (also CitySearchCtrl):
   let getRestaurantList = (searchText) => {
-    console.log("FactualApi", FactualCreds.apiKey);
-
-
    // adding active class to spinner
    let spinnerDiv = angular.element('.search-spinner');
    spinnerDiv.addClass('active');
 
-
     let restaurantArray = []
     let returnObjArray = null;
     let count = 0;
-      return $q(function(resolve, reject){
+    return $q(function(resolve, reject){
     // without node server
-        // $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
+    // $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
+    // using localhost
     // $http.get(`http://localhost:6660/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&q=${searchText}`
-        $http.get(`https://vwayfactualproxy.herokuapp.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&q=${searchText}`
-        )
+    // using node server    
+       $http.get(`https://vwayfactualproxy.herokuapp.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&q=${searchText}`)
 
-                                            // /t/restaurants-us?filters={%22$and%22:[{%22cuisine%22:{%22$includes%22:%22vegan%22}}]}&q=honolulu%20hi
-// COMMENT IN FOR NASHVILLE TEST DATA (also CitySearchCtrl):
-    // let getRestaurantList = () => { 
-    //     let returnObjArray = null;
-    //     let restaurantArray = [];
-    //     // let count = 0;
-    //     return $q(function(resolve, reject){
-    //       $http.get(`nashvilleFactualResponse.json`)
-// *************************
         .success(function(returnObject){ 
-          console.log("returnObject", returnObject);
           // push each item into array - will be an object with keyvalue pair 
           returnObjArray = returnObject.data;
           for (var i = 0; i < returnObjArray.length; i++) {
             (function (i) { 
               getPhotoReference(returnObjArray[i].latitude, returnObjArray[i].longitude, returnObjArray[i].name)
               .then(function(returnFromPlacesCall) {
-                console.log("<<<", returnFromPlacesCall);
                 if (returnFromPlacesCall.results[0].photos) {
                   let photoReference = returnFromPlacesCall.results[0].photos[0].photo_reference;
-                  
                   let photoPath = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GoogleCreds.apiKey}`
-
                   returnObjArray[i].photoPath = photoPath;
                 } else {
-                  // console.log("AVOCADO PICTURE INSTEAD");
+                  // AVOCADO PICTURE INSTEAD
                   returnObjArray[i].photoPath =  `images/avocado.png`
                 }
                 // set favorite to false for heart icon
@@ -59,6 +40,7 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
               })
             })(i)
           };
+          // remove spinner class
           spinnerDiv.removeClass('active');
         })
         .error(function(error){
@@ -74,9 +56,9 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
         // using google maps
         // $http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
         // using localhost server
-        $http.get(`https://vwayfactualproxy.herokuapp.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
         // $http.get(`http://localhost:6660/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
-        
+        // using node server
+        $http.get(`https://vwayfactualproxy.herokuapp.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
 
           .success(function(returnObject){ 
             resolve(returnObject);
@@ -93,7 +75,6 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
       $http.post(`${FirebaseURL}/favorites.json`,
        JSON.stringify(newFavorite))
       .success(function(ObjFromFirebase){
-        console.log("FROM FIREBASE: ", ObjFromFirebase );
         let newFavoriteId = ObjFromFirebase.name;
         newFavorite.favoriteId = newFavoriteId;
         $http.patch(`${FirebaseURL}/favorites/${newFavoriteId}.json`, newFavorite);
@@ -103,7 +84,6 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
 
 
   let postComment = function(newComment, favoriteId) {
-    console.log("newComment", newComment);
     return $q(function(resolve, reject){
       $http.patch(`${FirebaseURL}/favorites/${favoriteId}.json`,{ "comment": newComment});
     });
@@ -113,7 +93,6 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
   let getFavorites = function() {
     let favorites = [];
     return $q(function(resolve, reject) {
-      console.log("user id?", AuthFactory.getUser());
       $http.get(`${FirebaseURL}/favorites.json?orderBy="uid"&equalTo="${AuthFactory.getUser()}"`)
       .success(function(favoritesObj) {
       //create array from object and loop thru keys to push each favorite to the favorites array
