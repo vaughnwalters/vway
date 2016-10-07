@@ -8,18 +8,12 @@
       <form>
         <div class="input-field">
           <input class="v-card-title-font" id="search" type="search" placeholder="Search your favorites for some tasty snacks!" ng-model="searchFavorites" required>
-          <!-- <label for="search"><i class="material-icons" ng-click="searchDatabase(cityToSearch)">search</i></label> -->
           <i class="material-icons">close</i>
         </div>
       </form>
     </div>
   </nav>
 </div>
-
-
-<!-- 
-  <input type="text" ng-model="searchFavorites" placeholder="search Favorites"> -->
-
 
 <div class="space-from-nav-fav full-width">
   <div class="row">
@@ -33,15 +27,9 @@
             <span class="card-title activator green-text text-darken-4 v-card-title-font">{{favorite.name}}</span>
             <p class="v-card-font">{{favorite.locality}}, {{favorite.region}}
               <a href="" ng-click="removeFavorite(favorite.favoriteId); removeFavoriteToast(favorite.name)"><i class="material-icons cyan-text text-darken-4 right">delete</i>
-
-              
-
-
+              <!-- MAIL FAVORITE   -->
               <a href="mailto:%20?subject=Here&#8217s%20a%20restaurant%20for%20ya%20from%20VWAY!&body=%0A{{favorite.name}}%0A{{favorite.address}}%0A{{favorite.locality}},{{favorite.region}}%0A%0A{{favorite.website}}%0A%0A{{favorite.tel}}%0A%0A{{favorite.comment}}"><i class="material-icons cyan-text text-darken-4 right">email</i></a>
-
-
               </a>
-
             </p>
           </div>
           <div class="card-reveal v-card-font">
@@ -60,8 +48,6 @@
               <div class="card-image">
                 <img src="http://maps.googleapis.com/maps/api/staticmap?center={{favorite.latitude}},+{{favorite.longitude}}&zoom=14&scale=1&size=600x300&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C{{favorite.latitude}},+{{favorite.longitude}}" alt="Google Map of {{favorite.latitude}}, {{favorite.longitude}}">
               </div>
-
-
             </div>
           </div>
         </div>

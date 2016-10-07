@@ -19,36 +19,20 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     "photoPath": ""
   };
 
-// add this search to the navbar
 
-
-// *******************************
-// COMMENT IN FOR USING FACTUAL (also DatabaseFactory.js):
+// Calls factual (also uses DatabaseFactory.js):
   $scope.searchDatabase = function (cityToSearch) {
     DatabaseFactory.getRestaurantList(cityToSearch)
-    
-// COMMENT IN FOR NASHVILLE TEST DATA (also DatabaseFactory.js):
-  // $scope.searchDatabase = function () {
-  //   DatabaseFactory.getRestaurantList()
-// ******************************
     .then(function(dataFromResolve) {
       $scope.restaurants = dataFromResolve;
-      console.log("restaurants", $scope.restaurants);
     });  
   };
 
 
-
 // To change heart to full
-
-  // $scope.favoriteMode = false;
-
   $scope.activateFavoriteMode = function(restaurant) {
-    // $scope.favoriteMode = true;
     restaurant.isFavorite = true;
   };
-
-
 
 
   $scope.addToFavorites = function(restaurant) {
@@ -67,10 +51,10 @@ app.controller("CitySearchCtrl", function($scope, $routeParams, DatabaseFactory,
     DatabaseFactory.postNewFavorite($scope.newFavorite);
   };
 
+
   $scope.favoriteAddedToast = function(restaurantName) {
     Materialize.toast(restaurantName + " added to favorites", 1500);
   };
 
   
-
 });

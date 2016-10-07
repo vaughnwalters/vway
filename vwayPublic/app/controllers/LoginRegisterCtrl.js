@@ -21,6 +21,7 @@ app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
     $scope.registerMode = true;
   };
 
+
   $scope.activateLoginMode = function() {
     $scope.registerMode = false;
     $scope.loginMode = true;
@@ -28,18 +29,16 @@ app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
 
 
   // register function
-
   $scope.registerEmail = function() {
     firebase.auth().createUserWithEmailAndPassword($scope.registerData.email, $scope.registerData.password)
     .then(function(user) {
-      console.log("LOGIN", user.uid);
       $location.path("/citySearch");
       $scope.$apply();
     });
   };
 
-  // login function
 
+  // login function
   $scope.loginEmail = function() {
     firebase.auth().signOut();
     firebase.auth().signInWithEmailAndPassword($scope.loginData.email, $scope.loginData.password)
@@ -54,9 +53,6 @@ app.controller("LoginRegisterCtrl", function ($scope, $location, AuthFactory) {
     firebase.auth().signOut();
     AuthFactory.authWithProvider()
     .then(function(result) {
-      console.log(result);
-      // var user = result.user.uid;
-      // console.log("AND THE LOGGED USER IS...", user.uid);
       $location.url("/favorites");
       $scope.$apply();
     }).catch(function(error) {

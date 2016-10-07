@@ -4,12 +4,10 @@ app.factory("AuthFactory", function() {
 
   let currentUserId = null;
   let provider = new firebase.auth.GoogleAuthProvider();
-  console.log("provider", provider);
 
-
+// log in user
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      console.log("User logged in", user.uid);
       currentUserId = user.uid;
     }
     else {
