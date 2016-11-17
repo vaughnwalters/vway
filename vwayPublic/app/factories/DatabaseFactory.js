@@ -11,11 +11,6 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
     let returnObjArray = null;
     let count = 0;
     return $q(function(resolve, reject){
-    // without node server
-    // $http.get(`http://api.v3.factual.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&KEY=${FactualCreds.apiKey}&q=${searchText}`
-    // using localhost
-    // $http.get(`http://localhost:6660/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&q=${searchText}`
-    // using node server    
        $http.get(`https://vwayfactualproxy.herokuapp.com/t/restaurants-us?filters={"$and":[{"cuisine":{"$includes":"vegan"}}]}&q=${searchText}`)
 
         .success(function(returnObject){ 
@@ -53,11 +48,6 @@ app.factory("DatabaseFactory", function($q, $http, FirebaseURL, AuthFactory, Goo
 // HELPER FUNCTION FOR getRestaurantList
   let getPhotoReference = (latitude, longitude, name) => {
       return $q(function(resolve, reject){
-        // using google maps
-        // $http.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
-        // using localhost server
-        // $http.get(`http://localhost:6660/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
-        // using node server
         $http.get(`https://vwayfactualproxy.herokuapp.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=500&type&name=${name}&key=${GoogleCreds.apiKey}`)
 
           .success(function(returnObject){ 
